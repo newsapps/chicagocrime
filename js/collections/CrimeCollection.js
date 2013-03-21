@@ -1,10 +1,10 @@
-// Generic collection that uses JSONP by default for portability and parses out
-// Tastypie API format.
-
+// Abstract base collection class that uses JSONP by default for portability
+// and parses out Tastypie API format into something Backbone-ready.
 define([ 'jquery', 'backbone' ], function($, Backbone) {
 
     var CrimeCollection = Backbone.Collection.extend({
         sync: function(method, model, options) {
+            // Override default sync method to use jsonp for portability
             var params = _.extend({
                 type: 'GET',
                 dataType: 'jsonp',
@@ -14,8 +14,10 @@ define([ 'jquery', 'backbone' ], function($, Backbone) {
             return $.ajax(params);
         },
         parse: function(data) {
-            // Parse out 'meta' and return 'objects'
+            // Add Tastypie's 'meta' property as collection attribute
             this.meta = data.meta;
+
+            // Return Tastypie's 'objects' property as collection data
             return data.objects;
         },
     });
