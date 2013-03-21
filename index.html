@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+   
+<head>
+    <title>Chicago Crime API Example Site</title>
+
+    <!-- Twitter bootstrap -->
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap-2.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap-2.3.1/css/bootstrap-responsive.min.css" />
+    
+    <!-- Application CSS -->
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <!-- HTML5 shim -->
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- These are required for responsiveness and consistent rendering -->
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--
+    Define some run-time configuration variables. Tweak these to use your
+    own data source.
+    // -->
+    <script type="text/javascript">
+    CRIME_API_BASE_URL = "http://crime.beta.tribapps.com/api/1.0/";
+    </script>
+
+    <!--
+    Load RequireJS. The `data-main` attribute specifies the file
+    RequireJS will use as an entry point, such as `js/main.js`. Basic
+    configuration and application loading happens there.
+    // -->
+    <script data-main="js/main" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.4/require.js"></script>
+</head>
+
+<body>
+
+<!--
+Because this project uses the single page app pattern, ALL body rendering
+is handled by Backbone. What are you waiting for? Start hacking on js/main.js!
+//-->
+<p id="init-app">Loading...</p>
+
+</body>
+</html>

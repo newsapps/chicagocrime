@@ -1,0 +1,10 @@
+body {
+    background-color: #333;
+}
+
+#init-app {
+    color: #fff;
+    font-size: 40px;
+    text-align: center;
+    margin-top: 60px;
+}
