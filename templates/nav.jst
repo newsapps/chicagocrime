@@ -1,0 +1,7 @@
+<div class="nav">
+    <ul class="nav">
+        <% _.each(_.pairs(menuItems), function(item) { %>
+            <li><a href="<%= item[0] %>"><%= item[1] %></a></li>
+        <% }) %> 
+    </ul>
+</div>
