@@ -1,0 +1,19 @@
+<table class="table">
+    <thead>
+        <tr>
+            <% _.each(headers, function(header) { %>
+            <th><%= header %></th>
+            <% }) %>
+        </tr>
+    </thead>
+    <tbody>
+        <% _.each(rows, function(row) { %>
+        <tr>
+            <% _.each(_.values(row), function(value) { %>
+                <td><%= value %></td>
+            <% }); %>
+        </tr>
+        <% }) %>
+    </tbody>
+</table>
+

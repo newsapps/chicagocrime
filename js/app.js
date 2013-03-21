@@ -1,11 +1,11 @@
 define([ 'jquery', 'underscore', 'backbone', 'router', 'views/NavView', 'views/CrimeAppView', 'text!templates/home.jst' ], 
 function($, _, Backbone, Router, NavView, CrimeAppView, HomeTemplate) {
     // Add a "fetch" event to signal start of collection AJAX call.
-    //var fetch = Backbone.Collection.prototype.fetch;
-    //Backbone.Collection.prototype.fetch = function(options) {
-        //this.trigger("fetch");
-        //return fetch.call(this, options);
-    //};
+    var fetch = Backbone.Collection.prototype.fetch;
+    Backbone.Collection.prototype.fetch = function(options) {
+        this.trigger("fetch");
+        return fetch.call(this, options);
+    };
 
     // Initialize
     var initialize = function() {

@@ -12,15 +12,15 @@ define([ 'jquery', 'backbone', 'collections/DateSummaryCollection', 'views/Commu
                 collection: dateSummaryCollection 
             });
 
-            //this.router.on('route', function() {
-                //console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: Any route triggered. Hide all views.');
-                //communityAreaDetailView.$el.hide();
-            //});
+            this.router.on('route', function() {
+                console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: Any route triggered. Hide all views.');
+                communityAreaDetailView.$el.hide();
+            });
             
             this.router.on('route:community_area_detail', function(community_area_id) {
                 console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: `community_area_detail` route triggered. Fetch data.');
                 dateSummaryCollection.fetch({
-                    data: { 'community_area': community_area_id },
+                    data: { 'community_area': community_area_id, 'include': 'narcotics,theft,crime_date' },
                     success: function(data) { console.log('should run after routing shit'); console.log(data); return data; }
                 });
             });
