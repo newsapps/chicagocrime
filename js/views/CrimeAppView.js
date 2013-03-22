@@ -7,10 +7,8 @@ function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView, Co
         id: 'content',
         initialize: function(options) {
             console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: Setting up main crime data application.');
+            var app = this;
             this.router = options.router;
-
-            // Set height
-            this.$el.css('min-height', ($(window).height() - 100) + 'px');
 
             // Home page view
             var homePageView = new PageView({template: 'templates/home.jst', 'id': 'home-page'});
@@ -33,8 +31,12 @@ function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView, Co
             var docDetailView = new DocDetailView({'docs': docs});
             $('#content').append(docDetailView.$el);
 
+            // Size all containers
+            $('#content > div').css('min-height', ($(window).height() - 100) + 'px');
+            
             this.router.on('beforeroute', function() {
                 console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: `beforeroute` triggered on any route. Hide all views.');
+
                 homePageView.hide();
                 communityAreaListView.hide();
                 communityAreaDetailView.hide();
