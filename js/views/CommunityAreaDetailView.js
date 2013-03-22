@@ -8,6 +8,7 @@ define([ 'underscore', 'backbone', 'text!templates/table.jst' ], function(_, Bac
         render: function() {
             console.log('CHICAGO CRIME [js/views/CommunityAreaDetailView.js]: Render community area detail table.');
             var rows = this.collection.toJSON();
+            this.$el.empty();
             this.$el.html(this.template({ 'headers': _.keys(rows[0]), 'rows': rows }));
             this.$el.show();
             return this;

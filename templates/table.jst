@@ -7,11 +7,17 @@
         </tr>
     </thead>
     <tbody>
-        <% _.each(rows, function(row) { %>
+        <% _.each(data, function(row) { %>
         <tr>
-            <% _.each(_.values(row), function(value) { %>
-                <td><%= value %></td>
-            <% }); %>
+            <% if (order) { %>
+                <% _.each(order, function(key) { %>
+                    <td><%= row %></td>
+                <% }); %>
+            <% } else { %>
+                <% _.each(_.values(row), function(value) { %>
+                    <td><%= value %></td>
+                <% }); %>
+            <% } %>
         </tr>
         <% }) %>
     </tbody>
