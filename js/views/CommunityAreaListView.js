@@ -1,6 +1,6 @@
 define([ 'underscore', 'backbone', 'text!templates/table.jst' ], function(_, Backbone, TableTemplate) {
     var CommunityAreaListView = Backbone.View.extend({
-        el: '#community-area-list',
+        id: 'community-area-list',
         initialize: function(options) {
             this.template = _.template(TableTemplate);
             this.collection.bind('sync', this.render, this);
