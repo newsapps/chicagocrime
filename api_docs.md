@@ -33,24 +33,39 @@ A few of the less obvious fields explained:
 * *crime_date*: Includes hours, minutes and seconds.
 
 ### Sample data:
-beat: "2122",
-block: "028XX S DR MARTIN LUTHER KING JR DR",
-case_number: "HT235416",
-community_area: "Douglas",
-community_area_number: 35,
-crime_date: "2011-04-05T10:00:00",
-description: "SIMPLE",
-domestic: true,
-fbi_code: "08A",
-id: "8003659",
-iucr: "0560",
-latitude: 41.8426921741942,
-location_description: "RESTAURANT",
-longitude: -87.6170730833713,
-neighborhood: "Prairie Shores",
-primary_type: "ASSAULT",
-ward: 4,
-year: 2011
+```json
+meta: {
+    limit: 2
+    next: "/api/1.0-beta1/crime/?format=jsonp&limit=2&offset=2&community_area=10"
+    offset: 0
+    previous: null
+    total_count: 1573
+}
+objects: [
+    {
+        beat: "1611"
+        block: "063XX N NAGLE AVE"
+        case_number: "HV379310"
+        category: "P"
+        classification: "/api/1.0-beta1/crimeclassification/89/"
+        community_area: "/api/1.0-beta1/communityarea/10/"
+        community_number: 10
+        crime_date: "2012-07-12T09:10:00"
+        description: "RETAIL THEFT"
+        domestic: false
+        fbi_code: "06"
+        id: "8703207"
+        iucr: "0860"
+        latitude: 41.9959560990624
+        location_description: "DRUG STORE"
+        longitude: -87.7876401209694
+        neighborhood: null
+        primary_type: "THEFT"
+        ward: 41
+        year: 2012
+    },
+]
+```
 
 *Filterable by: all fields except community area number* [we should fix that]
 
