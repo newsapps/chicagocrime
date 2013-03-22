@@ -37,7 +37,7 @@ function($, _, Backbone, Router, Spinner, NavView, CrimeAppView, HomeTemplate) {
         $('#spinner').append(spinner.el);
 
         console.log('CHICAGO CRIME [js/app.js]: Initialize crime application controller view.');
-        var app = new CrimeAppView({ 'router': router });
+        var app = new CrimeAppView({ 'el': $('#content'), 'router': router });
 
         console.log('CHICAGO CRIME [js/app.js]: Enable Backbone history.');
         Backbone.history.start();
