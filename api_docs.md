@@ -151,19 +151,29 @@ objects: [
 Returns report-level crime data.
 
 ## Fields
-*Filterable*:
+**Filterable:**
 
 * `primary_type` (the crime's main type)
 * `description` (detail about the crime’s primary_type)
+* `beat` (police beat the crime occurred in)
+* `block`
+* `case_number` (the crime’s unique number in the Chicago PD’s system)
+* `community_area`
+* `community_number` (number assigned to the community area by the city of Chicago)
+* `crime_date` (includes hours, minutes and seconds)
 * `domestic` (if the crime was a domestic case)
 * `fbi_code`
+* `id`
 * `iucr`
+* `latitude`
+* `longitude`
 * `location_description` (what area the crime happened in)
 * `neighborhood`
-* `beat` (police beat the crime occurred in)
-* `case_number` (the crime’s unique number in the Chicago PD’s system)
-* `community_area_number` (number assigned to the community area by the city of Chicago)
-* `crime_date` (includes hours, minutes and seconds)
+* `ward`
+* `year`
+
+**Unfilterable:**
+* `category`
 
 ### Example queries
 
