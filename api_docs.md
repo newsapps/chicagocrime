@@ -5,10 +5,14 @@ and crime classification API endpoints.<br />**Base URL** - http://crime.chicago
 
 # Available endpoints
 
-* http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=json - Daily summary data [[jump to details](https://github.com/newsapps/chicagocrime/blob/master/api_docs.md#daily-summary-data)]
-* http://crime.chicagotribune.com/api/1.0-beta1/crime/?format=json - Report-level crime data [[jump to details](https://github.com/newsapps/chicagocrime/blob/master/api_docs.md#crime-reports)]
-* http://crime.chicagotribune.com/api/1.0-beta1/communityarea/?format=json - Community areas [[jump to details](https://github.com/newsapps/chicagocrime/blob/master/api_docs.md#community-area)]
-* http://crime.chicagotribune.com/api/1.0-beta1/crimeclassification/?format=json - Crime classifications [[jump to details](https://github.com/newsapps/chicagocrime/blob/master/api_docs.md#crime-classifications)]
+* Daily summary data [[jump to details](https://github.com/newsapps/chicagocrime/blob/master/api_docs.md#daily-summary-data)]
+<br />http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=json - 
+* Report-level crime data [[jump to details](https://github.com/newsapps/chicagocrime/blob/master/api_docs.md#crime-reports)]
+<br />http://crime.chicagotribune.com/api/1.0-beta1/crime/?format=json
+* Community areas [[jump to details](https://github.com/newsapps/chicagocrime/blob/master/api_docs.md#community-area)]
+<br />http://crime.chicagotribune.com/api/1.0-beta1/communityarea/?format=json
+* Crime classifications [[jump to details](https://github.com/newsapps/chicagocrime/blob/master/api_docs.md#crime-classifications)]
+<br />http://crime.chicagotribune.com/api/1.0-beta1/crimeclassification/?format=json
 
 # Data formats
 
