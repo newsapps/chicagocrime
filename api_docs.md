@@ -1,7 +1,7 @@
 # Versions
 
-* **1.0-beta-1** - Initial release: Provides daily summary, crime report, community area, 
-and crime classification API endpoints.<br />Base URL: http://crime.chicagotribune.com/api/1.0-beta1/
+* **1.0-beta-1** Provides daily summary, crime report, community area, 
+and crime classification API endpoints.<br />**Base URL**: http://crime.chicagotribune.com/api/1.0-beta1/
 
 # Available endpoints
 
