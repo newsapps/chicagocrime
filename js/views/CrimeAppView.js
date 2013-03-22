@@ -6,6 +6,10 @@ define([ 'jquery', 'backbone', 'collections/DateSummaryCollection', 'views/PageV
             console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: Setting up main crime data application.');
             this.router = options.router;
 
+            // Set height
+            this.$el.css('min-height', ($(window).height() - 100) + 'px');
+
+            // Home page view
             var homePageView = new PageView({template: 'templates/home.jst', 'id': 'home-page'});
             $('#content').append(homePageView.$el);
 
