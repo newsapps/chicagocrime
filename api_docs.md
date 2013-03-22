@@ -90,7 +90,7 @@ objects: [
 ```
 
 
-### Custom parameters
+### Related parameter
 
 When filtering by community area, add the `related=1` parameter to 
 your query to get extended community area data in the `meta` key of the 
@@ -219,3 +219,25 @@ When filtering by community area, add the `related=1` parameter to
 your query to get extended community area data in the `meta` key of the 
 API response. See the example under the Daily Crime Summary endpoint
 documentation for more detail.
+
+##Community Area
+Use this endpoint to get demographic information about all of Chicago's 77 community areas. This is pretty much only useful to grab info about all of the communities at once. To get data specific to one community area, use the `related=1` query string parameter. (See the example under the Daily Crime Summary endpoint documentation for more detail.)
+
+###Fields
+
+**Unfilterable:**
+* `adjacent_area_numbers`
+* `area_number`
+* `hardship_index`
+* `name`
+* `pct_crowded`
+* `pct_no_diploma`
+* `pct_old_and_young`
+* `pct_poverty`
+* `pct_unemployed`
+* `per_capita_income`
+* `population`
+* `shape_area`
+* `shape_len`
+* `slug`
+* `wikipedia`
