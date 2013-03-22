@@ -281,7 +281,7 @@ Provides context about crime classifications and what they indicate.
 * `category` (values indicate a violent crime, property crime, quality-of-life crime or no designation)
 * `classification` (official three-letter code for crime, which could be null)
 * `id`
-* index_code`
+* `index_code`
 * `iucr`
 * `primary_description` (crime type, corresponding to classification)
 * `secondary_description` (details about primary description)
