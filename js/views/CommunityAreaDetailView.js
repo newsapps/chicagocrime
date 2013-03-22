@@ -23,6 +23,7 @@ define([ 'underscore', 'backbone', 'text!templates/table.jst' ], function(_, Bac
         },
         hide: function() {
             this.$el.empty();
+            this.$el.hide();
             return this;
         }
     });

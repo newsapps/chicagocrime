@@ -1,4 +1,4 @@
-define([ 'jquery', 'underscore', 'backbone', 'router', 'views/NavView', 'views/CrimeAppView', 'text!templates/home.jst' ], 
+define([ 'jquery', 'underscore', 'backbone', 'router', 'views/NavView', 'views/CrimeAppView', 'text!templates/frame.jst' ], 
 function($, _, Backbone, Router, NavView, CrimeAppView, HomeTemplate) {
     // Initialize
     var initialize = function() {
