@@ -6,8 +6,8 @@
 
 # Available endpoints
 
-* http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=json - Daily summary data
-* http://crime.chicagotribune.com/api/1.0-beta1/crime/?format=json - Report-level crime data
+* http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=json - Daily summary data [[jump to details](https://github.com/newsapps/chicagocrime/blob/master/api_docs.md#daily-summary-data)]
+* http://crime.chicagotribune.com/api/1.0-beta1/crime/?format=json - Report-level crime data [[jump to details](https://github.com/newsapps/chicagocrime/blob/master/api_docs.md#crime-reports)]
 * http://crime.chicagotribune.com/api/1.0-beta1/communityarea/?format=json - Community areas *(Not documented)*
 * http://crime.chicagotribune.com/api/1.0-beta1/crimeclassification/?format=json - Crime classifications *(Not documented)*
 
@@ -151,18 +151,29 @@ objects: [
 Returns report-level crime data.
 
 ## Fields
+**Filterable:**
 
-* *primary_type*: The main type of the crime
-* *description*: Provides further detail about the crime’s primary_type. There are X possible values for primary_type and X for description.
-* *domestic*: Whether or not the crime was a domestic case.
-* *fbi_code*:
-* *iucr*:
-* *location_description*: What sort of place the crime happened in.
-* *neighborhood*: The name of the neighborhood. [how is this assigned?]
-* *beat*: The police beat the crime occurred in
-* *case_number*: The crime’s unique number in the Chicago PD’s system
-* *community_area_number*: The number assigned to the community area by the city of Chicago.
-* *crime_date*: Includes hours, minutes and seconds.
+* `primary_type` (the crime's main type)
+* `description` (detail about the crime’s primary_type)
+* `beat` (police beat the crime occurred in)
+* `block`
+* `case_number` (the crime’s unique number in the Chicago PD’s system)
+* `community_area`
+* `community_number` (number assigned to the community area by the city of Chicago)
+* `crime_date` (includes hours, minutes and seconds)
+* `domestic` (if the crime was a domestic case)
+* `fbi_code`
+* `id`
+* `iucr`
+* `latitude`
+* `longitude`
+* `location_description` (what area the crime happened in)
+* `neighborhood`
+* `ward`
+* `year`
+
+**Unfilterable:**
+* `category`
 
 ### Example queries
 
@@ -202,7 +213,7 @@ objects: [
 ]
 ```
 
-### Custom parameters
+### Related parameter
 
 When filtering by community area, add the `related=1` parameter to 
 your query to get extended community area data in the `meta` key of the 
