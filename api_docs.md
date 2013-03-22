@@ -4,26 +4,26 @@
 
 **URL**: http://crime.chicagotribune.com/api/1.0-beta1/
 
+# Data formats
 
-# Available formats
+Specify data format with the `format` querystring parameter. 
 
-Append “format=json” or “format=csv” to the end of your query string to return those formats.
+**Supported formats**: `json`, `jsonp`, `xml`, `csv`
 
 # Endpoints
 
-## Crime
+## Crime reports
 
 **URL**: http://crime.chicagotribune.com/api/1.0-beta1/crime/?format=json
 
 Returns report-level crime data.
 
-A few of the less obvious fields explained:
+## Fields
 
 * *primary_type*: The main type of the crime
 * *description*: Provides further detail about the crime’s primary_type. There are X possible values for primary_type and X for description.
 * *domestic*: Whether or not the crime was a domestic case.
 * *fbi_code*:
-* *id*:
 * *iucr*:
 * *location_description*: What sort of place the crime happened in.
 * *neighborhood*: The name of the neighborhood. [how is this assigned?]
@@ -32,38 +32,40 @@ A few of the less obvious fields explained:
 * *community_area_number*: The number assigned to the community area by the city of Chicago.
 * *crime_date*: Includes hours, minutes and seconds.
 
-### Sample data:
+### Sample query:
+http://crime.chicagotribune.com/api/1.0-beta1/crime/?format=jsonp&limit=1&community_area=10&crime_date__gte=2012-01-01
+
 ```json
 meta: {
-    limit: 2
-    next: "/api/1.0-beta1/crime/?format=jsonp&limit=2&offset=2&community_area=10"
+    limit: 1
+    next: "/api/1.0-beta1/crime/?limit=1&format=jsonp&community_area=10&crime_date__gte=2012-01-01&offset=1"
     offset: 0
     previous: null
-    total_count: 1573
+    total_count: 761
 }
 objects: [
     {
-        beat: "1611"
-        block: "063XX N NAGLE AVE"
-        case_number: "HV379310"
+        beat: "1613"
+        block: "049XX N NEENAH AVE"
+        case_number: "HV237876"
         category: "P"
-        classification: "/api/1.0-beta1/crimeclassification/89/"
+        classification: "/api/1.0-beta1/crimeclassification/84/"
         community_area: "/api/1.0-beta1/communityarea/10/"
         community_number: 10
-        crime_date: "2012-07-12T09:10:00"
-        description: "RETAIL THEFT"
+        crime_date: "2012-01-01T00:01:00"
+        description: "FINANCIAL ID THEFT: OVER $300"
         domestic: false
         fbi_code: "06"
-        id: "8703207"
-        iucr: "0860"
-        latitude: 41.9959560990624
-        location_description: "DRUG STORE"
-        longitude: -87.7876401209694
+        id: "8562819"
+        iucr: "0840"
+        latitude: 41.970780822155
+        location_description: "OTHER"
+        longitude: -87.7905431601999
         neighborhood: null
         primary_type: "THEFT"
         ward: 41
         year: 2012
-    },
+    }
 ]
 ```
 
