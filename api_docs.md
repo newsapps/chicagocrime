@@ -70,12 +70,16 @@ objects: [
 ]
 ```
 
-## Summary data
+## Daily summary data
 
-### Filterable fields
+Provides counts for every major crime type, by day and community area.
+
+### Fields
+
+**Filterable**:
 
 * `crime_date`
-* `community_area`
+* `community_area` (filter by community area number)
 * `year`
 * `arson`
 * `assault`
@@ -89,6 +93,46 @@ objects: [
 * `robbery`
 * `sexual_assault`
 * `theft`
+
+**Unfilterable**:
+
+* `community_name`
+* `community_number`
+
+### Example queries
+
+http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=jsonp&limit=1&year=2013
+
+```json
+meta: {
+    limit: 1
+    next: "/api/1.0-beta1/datesummary/?format=jsonp&limit=1&offset=1&year=2013"
+    offset: 0
+    previous: null
+    total_count: 5029
+}
+objects: [
+    {
+        arson: 0
+        assault: 0
+        battery: 0
+        burglary: 1
+        community_area: "/api/1.0-beta1/communityarea/1/"
+        community_name: "Rogers Park"
+        community_number: 1
+        crime_date: "2013-01-01"
+        criminal_damage: 0
+        homicide: 0
+        motor_vehicle_theft: 0
+        narcotics: 0
+        prostitution: 0
+        robbery: 2
+        sexual_assault: 0
+        theft: 3
+        year: 2013
+    }
+]
+```
 
 
 ### Custom parameters
