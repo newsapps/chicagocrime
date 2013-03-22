@@ -1,0 +1,6 @@
+<h1><%= title %></h1>
+<ul>
+    <% _.each(rows, function(row) { %>
+    <li><a href="<%= row.link %>"><%= row.label %></a></li>
+    <% }) %>
+</ul>

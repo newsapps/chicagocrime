@@ -4,7 +4,9 @@ define([ 'backbone' ], function(Backbone) {
         routes: {
             '': 'home',
             'community': 'community_areas',
-            'community/:community_area_id': 'community_area_detail'
+            'community/:community_area_id': 'community_area_detail',
+            'docs': 'documentation',
+            'docs/:id': 'doc_view'
         },
         route: function(route, name, callback) {
             if (!_.isRegExp(route)) route = this._routeToRegExp(route);

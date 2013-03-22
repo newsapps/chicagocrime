@@ -1,4 +1,7 @@
-define([ 'jquery', 'backbone', 'collections/DateSummaryCollection', 'views/PageView', 'views/CommunityAreaListView', 'views/CommunityAreaDetailView' ], function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView, CommunityAreaDetailView) {
+define([ 'jquery', 'backbone', 
+         'collections/DateSummaryCollection', 
+         'views/PageView', 'views/CommunityAreaListView', 'views/CommunityAreaDetailView', 'views/DocListView' ], 
+function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView, CommunityAreaDetailView, DocListView) {
 
     var CrimeAppView = Backbone.View.extend({
         id: 'content',
@@ -22,11 +25,16 @@ define([ 'jquery', 'backbone', 'collections/DateSummaryCollection', 'views/PageV
             var communityAreaDetailView = new CommunityAreaDetailView({ collection: dateSummaryCollection });
             $('#content').append(communityAreaDetailView.$el);
 
+            // Documentation
+            var docListView = new DocListView({'docs': ['api_docs.md', 'frontend_development.md']});
+            $('#content').append(docListView.$el);
+
             this.router.on('beforeroute', function() {
                 console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: `beforeroute` triggered on any route. Hide all views.');
                 homePageView.hide();
                 communityAreaListView.hide();
                 communityAreaDetailView.hide();
+                docListView.hide();
             });
 
             this.router.on('route:home', function(community_area_id) {
@@ -48,6 +56,11 @@ define([ 'jquery', 'backbone', 'collections/DateSummaryCollection', 'views/PageV
                         'limit': 0 
                     },
                 });
+            });
+
+            this.router.on('route:documentation', function() {
+                console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: `documentation` route triggered.');
+                docListView.show();
             });
         }
     });
