@@ -4,13 +4,26 @@
 
 **URL**: http://crime.chicagotribune.com/api/1.0-beta1/
 
+# Available endpoints
+
+* http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=json - Daily summary data
+* http://crime.chicagotribune.com/api/1.0-beta1/crime/?format=json - Report-level crime data
+* http://crime.chicagotribune.com/api/1.0-beta1/communityarea/?format=json - Community areas (*Not documented*)
+* http://crime.chicagotribune.com/api/1.0-beta1/crimeclassification/?format=json - Crime classifications (*Not documented*)
+
 # Data formats
 
 Specify data format with the `format` querystring parameter. 
 
 **Supported formats**: `json`, `jsonp`, `xml`, `csv`
 
-# Endpoints
+# Including fields
+
+Specifying the `include=fieldname1,fieldname2` parameter will include only the fields specified in the querystring, 
+plus any required fields (like unique identifier). Omitting the `include` parameter means all available fields will 
+be returned.
+
+# Endpoint details
 
 ## Daily summary data
 
@@ -188,3 +201,10 @@ objects: [
     }
 ]
 ```
+
+### Custom parameters
+
+When filtering by community area, add the `related=1` parameter to 
+your query to get extended community area data in the `meta` key of the 
+API response. See the example under the Daily Crime Summary endpoint
+documentation for more detail.
