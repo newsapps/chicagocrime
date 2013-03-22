@@ -1,9 +1,11 @@
-define([ 'underscore', 'backbone', 'text!templates/table.jst' ], function(_, Backbone, TableTemplate) {
+define([ 'underscore', 'backbone', 'collections/CommunityAreaCollection', 'text!templates/table.jst' ], function(_, Backbone, CommunityAreaCollection, TableTemplate) {
     var CommunityAreaListView = Backbone.View.extend({
         id: 'community-area-list',
         initialize: function(options) {
             this.template = _.template(TableTemplate);
+            this.collection = new CommunityAreaCollection();
             this.collection.bind('sync', this.render, this);
+            this.collection.fetch();
         },
         render: function() {
             console.log('CHICAGO CRIME [js/views/CommunityAreaListView.js]: Render community area list table.');
@@ -17,7 +19,14 @@ define([ 'underscore', 'backbone', 'text!templates/table.jst' ], function(_, Bac
                 'data': data,
                 'order': ["name", "area_number", "hardship_index", "pct_crowded", "pct_no_diploma", "pct_old_and_young", "pct_poverty", "pct_unemployed", "per_capita_income", "population", "shape_area"] 
             }));
+            return this;
+        },
+        show: function() {
             this.$el.show();
+            return this;
+        },
+        hide: function() {
+            this.$el.hide();
             return this;
         }
     });

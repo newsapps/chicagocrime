@@ -20,6 +20,10 @@ define([ 'underscore', 'backbone', 'text!templates/table.jst' ], function(_, Bac
             }));
             this.$el.show();
             return this;
+        },
+        hide: function() {
+            this.$el.empty();
+            return this;
         }
     });
     return CommunityAreaDetailView;
