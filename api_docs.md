@@ -8,7 +8,7 @@
 
 * http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=json - Daily summary data [[jump to details](https://github.com/newsapps/chicagocrime/blob/master/api_docs.md#daily-summary-data)]
 * http://crime.chicagotribune.com/api/1.0-beta1/crime/?format=json - Report-level crime data [[jump to details](https://github.com/newsapps/chicagocrime/blob/master/api_docs.md#crime-reports)]
-* http://crime.chicagotribune.com/api/1.0-beta1/communityarea/?format=json - Community areas *(Not documented)*
+* http://crime.chicagotribune.com/api/1.0-beta1/communityarea/?format=json - Community areas [[jump to details](https://github.com/newsapps/chicagocrime/blob/master/api_docs.md#community-area)]
 * http://crime.chicagotribune.com/api/1.0-beta1/crimeclassification/?format=json - Crime classifications *(Not documented)*
 
 # Data formats
@@ -220,7 +220,7 @@ your query to get extended community area data in the `meta` key of the
 API response. See the example under the Daily Crime Summary endpoint
 documentation for more detail.
 
-##Community Area
+##Community areas
 Use this endpoint to get demographic information about all of Chicago's 77 community areas. This is pretty much only useful to grab info about all of the communities at once. To get data specific to one community area, use the `related=1` query string parameter. (See the example under the Daily Crime Summary endpoint documentation for more detail.)
 
 ###Fields
@@ -241,3 +241,71 @@ Use this endpoint to get demographic information about all of Chicago's 77 commu
 * `shape_len`
 * `slug`
 * `wikipedia`
+
+###Example query
+http://crime.chicagotribune.com/api/1.0-beta1/communityarea/?format=json
+```json
+meta: {
+    limit: 100,
+    next: null,
+    offset: 0,
+    previous: null,
+    total_count: 77
+},
+objects: [
+    {  
+        adjacent_area_numbers: "2,77",
+        area_number: 1,
+        hardship_index: 39,
+        name: "Rogers Park",
+        pct_crowded: "7.9",
+        pct_no_diploma: "18.1",
+        pct_old_and_young: "28.8",
+        pct_poverty: "22.7",
+        pct_unemployed: "7.5",
+        per_capita_income: 23714,
+        population: 54991,
+        shape_area: "51259902.4506",
+        shape_len: "34052.3975757",
+        slug: "rogers-park",
+        wikipedia: "Rogers Park, Chicago"
+    }
+]
+```
+
+##Crime classifications
+Provides context about crime classifications and what they indicate.
+
+###Fields
+**Unfilterable:**
+* `category` (values indicate a violent crime, property crime, quality-of-life crime or no designation)
+* `classification` (official three-letter code for crime, which could be null)
+* `id`
+* index_code`
+* `iucr`
+* `primary_description` (crime type, corresponding to classification)
+* `secondary_description` (details about primary description)
+
+###Example query
+http://crime.chicagotribune.com/api/1.0-beta1/crimeclassification/?format=json
+```json
+meta: {
+    limit: 100,
+    next: "/api/1.0-beta1/crimeclassification/?offset=100&limit=100&format=json",
+    offset: 0,
+    previous: null,
+    total_count: 391
+},
+objects: [
+    {
+        category: "V",
+        classification: "HOM",
+        id: "1",
+        index_code: "I",
+        iucr: "0110",
+        primary_description: "HOMICIDE",
+        secondary_description: "FIRST DEGREE MURDER"
+    }
+]
+```
+**Unfilterable:**
