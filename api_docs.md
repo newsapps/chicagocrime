@@ -36,18 +36,18 @@ Provides counts for every major crime type, by day and community area.
 * `crime_date`
 * `community_area` (filter by community area number)
 * `year`
-* `arson`
-* `assault`
-* `battery`
-* `burglary`
-* `criminal_damage`
-* `homicide`
-* `motor_vehicle_theft`
-* `narcotics`
-* `prostitution`
-* `robbery`
-* `sexual_assault`
-* `theft`
+* `arson` (arson count)
+* `assault` (assault count)
+* `battery` (battery count)
+* `burglary` (burglary count)
+* `criminal_damage` (criminal damge count)
+* `homicide` (homicide count)
+* `motor_vehicle_theft` (motor_vehicle_theft count)
+* `narcotics` (narcotics count)
+* `prostitution` (prositution count)
+* `robbery` (robbery county)
+* `sexual_assault` (sexual assault count)
+* `theft` (theft count)
 
 **Unfilterable**:
 
@@ -158,13 +158,12 @@ Returns report-level crime data.
 * `beat` (police beat the crime occurred in)
 * `block`
 * `case_number` (the crime’s unique number in the Chicago PD’s system)
-* `community_area`
-* `community_number` (number assigned to the community area by the city of Chicago)
+* `community_area` (filter by community area number, returns community area detail URL)
 * `crime_date` (includes hours, minutes and seconds)
 * `domestic` (if the crime was a domestic case)
 * `fbi_code`
 * `id`
-* `iucr`
+* `iucr` (Illinois Uniform Crime Report code)
 * `latitude`
 * `longitude`
 * `location_description` (what area the crime happened in)
@@ -174,6 +173,8 @@ Returns report-level crime data.
 
 **Unfilterable:**
 * `category`
+* `community_name`
+* `community_number`
 
 ### Example queries
 
@@ -273,7 +274,8 @@ objects: [
 ]
 ```
 
-##Crime classifications
+## Crime classifications
+
 Provides context about crime classifications and what they indicate.
 
 ###Fields
@@ -286,7 +288,8 @@ Provides context about crime classifications and what they indicate.
 * `primary_description` (crime type, corresponding to classification)
 * `secondary_description` (details about primary description)
 
-###Example query
+### Example query
+
 http://crime.chicagotribune.com/api/1.0-beta1/crimeclassification/?format=json
 ```json
 meta: {
