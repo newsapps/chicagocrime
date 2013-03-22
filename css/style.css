@@ -2,15 +2,42 @@ body {
     background-color: #333;
     padding-top: 60px;
 }
+#loading {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+}
 
 #content {
-    background-color: #e5e5e5;
+    background-color: #fefefe;
     margin: 0 20px;
     overflow: auto;
+    z-index: 10;
+    position: relative;
 }
 
 #init-app {
     font-size: 40px;
     text-align: center;
     margin-top: 90px;
+    color: #fff;
+}
+
+#spinner { height: 40px; padding-top: 40px; }
+.spinner { margin: 0 auto; }
+
+#home-page h1 {
+    margin-bottom: 27px;
+}
+#home-page p, #home-page li {
+    font-size: 18px;
+    line-height: 26px;
+    max-width: 1000px;
+}
+
+hr {
+    border-top: 1px solid #777;
+    border-bottom: 1px solid #ddd;
 }

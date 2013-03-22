@@ -6,7 +6,7 @@ define([ 'jquery', 'backbone', 'collections/DateSummaryCollection', 'views/PageV
             console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: Setting up main crime data application.');
             this.router = options.router;
 
-            var homePageView = new PageView({template: 'templates/home.jst'});
+            var homePageView = new PageView({template: 'templates/home.jst', 'id': 'home-page'});
             $('#content').append(homePageView.$el);
 
             var communityAreaListView = new CommunityAreaListView();
@@ -17,7 +17,7 @@ define([ 'jquery', 'backbone', 'collections/DateSummaryCollection', 'views/PageV
             $('#content').append(communityAreaDetailView.$el);
 
             this.router.on('beforeroute', function() {
-                console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: Route triggered. Hide all views.');
+                console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: `beforeroute` triggered on any route. Hide all views.');
                 homePageView.hide();
                 communityAreaListView.hide();
                 communityAreaDetailView.hide();
@@ -34,7 +34,6 @@ define([ 'jquery', 'backbone', 'collections/DateSummaryCollection', 'views/PageV
             });
 
             this.router.on('route:community_area_detail', function(community_area_id) {
-                console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: `community_area_detail` route triggered. Fetch data.');
                 dateSummaryCollection.fetch({
                     data: { 
                         'community_area': community_area_id, 
