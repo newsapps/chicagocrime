@@ -8,8 +8,8 @@
 
 * http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=json - Daily summary data
 * http://crime.chicagotribune.com/api/1.0-beta1/crime/?format=json - Report-level crime data
-* http://crime.chicagotribune.com/api/1.0-beta1/communityarea/?format=json - Community areas (*Not documented*)
-* http://crime.chicagotribune.com/api/1.0-beta1/crimeclassification/?format=json - Crime classifications (*Not documented*)
+* http://crime.chicagotribune.com/api/1.0-beta1/communityarea/?format=json - Community areas *(Not documented)*
+* http://crime.chicagotribune.com/api/1.0-beta1/crimeclassification/?format=json - Crime classifications *(Not documented)*
 
 # Data formats
 
