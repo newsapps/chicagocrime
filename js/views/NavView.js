@@ -12,7 +12,7 @@ define([ 'underscore', 'backbone', 'text!templates/nav.jst' ], function(_, Backb
                 var path = '#' + route[0].split('/').shift();
 
                 // Replace underscores and uppercase first letter of route name
-                var label = route[1].replace('_', ' ');
+                var label = route[1].replace(/_/g, " ")
                 label = label.charAt(0).toUpperCase() + label.slice(1);
 
                 // Add to menu if not already there

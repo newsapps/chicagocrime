@@ -8,6 +8,7 @@ require.config({
         backbone: 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone',
         bootstrap: '../lib/bootstrap-2.3.1/js/bootstrap.min',
         d3: 'http://cdnjs.cloudflare.com/ajax/libs/d3/3.0.8/d3',
+        docs: '../docs',
         jquery: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery',
         json: '../lib/json',
         moment: 'http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment',

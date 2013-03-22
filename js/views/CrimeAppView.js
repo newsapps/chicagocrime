@@ -1,7 +1,7 @@
 define([ 'jquery', 'backbone', 
          'collections/DateSummaryCollection', 
-         'views/PageView', 'views/CommunityAreaListView', 'views/CommunityAreaDetailView', 'views/DocListView' ], 
-function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView, CommunityAreaDetailView, DocListView) {
+         'views/PageView', 'views/CommunityAreaListView', 'views/CommunityAreaDetailView', 'views/DocListView', 'views/DocDetailView' ], 
+function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView, CommunityAreaDetailView, DocListView, DocDetailView) {
 
     var CrimeAppView = Backbone.View.extend({
         id: 'content',
@@ -26,8 +26,12 @@ function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView, Co
             $('#content').append(communityAreaDetailView.$el);
 
             // Documentation
-            var docListView = new DocListView({'docs': ['api_docs.md', 'frontend_development.md']});
+            var docs = ['api_docs.md', 'frontend_development.md'];
+            var docListView = new DocListView({'docs': docs});
             $('#content').append(docListView.$el);
+
+            var docDetailView = new DocDetailView({'docs': docs});
+            $('#content').append(docDetailView.$el);
 
             this.router.on('beforeroute', function() {
                 console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: `beforeroute` triggered on any route. Hide all views.');
@@ -35,6 +39,7 @@ function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView, Co
                 communityAreaListView.hide();
                 communityAreaDetailView.hide();
                 docListView.hide();
+                docDetailView.hide();
             });
 
             this.router.on('route:home', function(community_area_id) {
@@ -48,6 +53,7 @@ function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView, Co
             });
 
             this.router.on('route:community_area_detail', function(community_area_id) {
+                console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: `community_area_detail` (id: ' + community_area_id + ') route triggered. Fetching data.');
                 dateSummaryCollection.fetch({
                     data: { 
                         'community_area': community_area_id, 
@@ -61,6 +67,11 @@ function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView, Co
             this.router.on('route:documentation', function() {
                 console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: `documentation` route triggered.');
                 docListView.show();
+            });
+
+            this.router.on('route:doc_view', function(doc) {
+                console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: `doc_detail` route triggered.');
+                docDetailView.show(doc);
             });
         }
     });
