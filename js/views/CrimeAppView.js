@@ -28,7 +28,12 @@ define([ 'jquery', 'backbone', 'collections/DateSummaryCollection', 'collections
             this.router.on('route:community_area_detail', function(community_area_id) {
                 console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: `community_area_detail` route triggered. Fetch data.');
                 dateSummaryCollection.fetch({
-                    data: { 'community_area': community_area_id, 'related': 1, 'year__gte': 2012 },
+                    data: { 
+                        'community_area': community_area_id, 
+                        'related': 1, 
+                        'crime_date__gte': '2012-09-01', 
+                        'limit': 0 
+                    },
                 });
             });
         }
