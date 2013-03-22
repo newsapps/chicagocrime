@@ -32,7 +32,8 @@ Returns report-level crime data.
 * *community_area_number*: The number assigned to the community area by the city of Chicago.
 * *crime_date*: Includes hours, minutes and seconds.
 
-### Sample query:
+### Example queries
+
 http://crime.chicagotribune.com/api/1.0-beta1/crime/?format=jsonp&limit=1&community_area=10&crime_date__gte=2012-01-01
 
 ```json
@@ -69,9 +70,29 @@ objects: [
 ]
 ```
 
-*Filterable by: all fields except community area number* [we should fix that]
+## Summary data
 
-##Example queries
+### Filterable fields
 
-date range:
-http://localhost:8000/api/1.0/crime/?format=json&crime_date__gte=2012-06-05T10:00:00&crime_date__lt=2012-06-06T10:00:00
+* `crime_date`
+* `community_area`
+* `year`
+* `arson`
+* `assault`
+* `battery`
+* `burglary`
+* `criminal_damage`
+* `homicide`
+* `motor_vehicle_theft`
+* `narcotics`
+* `prostitution`
+* `robbery`
+* `sexual_assault`
+* `theft`
+
+
+### Custom parameters
+
+When filtering by community area, add the `related=1` parameter to 
+your query to get extended community area data in the `meta` key of the 
+API response.
