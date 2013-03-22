@@ -1,23 +1,18 @@
+<h1><%= title %></h1>
 <table class="table">
     <thead>
-        <tr>
-            <% _.each(headers, function(header) { %>
-            <th><%= header %></th>
-            <% }) %>
-        </tr>
+        <% _.each(order, function(header) { %>
+        <th>
+            <%= header.charAt(0).toUpperCase() + header.slice(1).replace(/_/g, ' ') %>
+        </th>
+        <% }) %>
     </thead>
     <tbody>
         <% _.each(data, function(row) { %>
         <tr>
-            <% if (order) { %>
-                <% _.each(order, function(key) { %>
-                    <td><%= row %></td>
-                <% }); %>
-            <% } else { %>
-                <% _.each(_.values(row), function(value) { %>
-                    <td><%= value %></td>
-                <% }); %>
-            <% } %>
+            <% _.each(order, function(key) { %>
+                <td><%= row[key] %></td>
+            <% }); %>
         </tr>
         <% }) %>
     </tbody>

@@ -7,18 +7,26 @@ define([ 'jquery', 'backbone', 'collections/DateSummaryCollection', 'collections
             this.router = options.router;
 
             var communityAreaCollection = new CommunityAreaCollection();
-            //var communityAreaListView = new CommunityAreaListView({ collection: communityAreaCollection });
+            var communityAreaListView = new CommunityAreaListView({ collection: communityAreaCollection });
+
+            var dateSummaryCollection = new DateSummaryCollection();
+            var communityAreaDetailView = new CommunityAreaDetailView({ collection: dateSummaryCollection });
+
+            this.router.on('route', function() {
+                console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: Route triggered. Hide all views.');
+                communityAreaListView.$el.empty();
+                communityAreaDetailView.$el.empty();
+            });
+
             this.router.on('route:community_areas', function(community_area_id) {
                 console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: `community_area_list` route triggered. Fetch data.');
                 communityAreaCollection.fetch();
             });
 
-            var dateSummaryCollection = new DateSummaryCollection();
-            var communityAreaDetailView = new CommunityAreaDetailView({ collection: dateSummaryCollection });
             this.router.on('route:community_area_detail', function(community_area_id) {
                 console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: `community_area_detail` route triggered. Fetch data.');
                 dateSummaryCollection.fetch({
-                    data: { 'community_area': community_area_id },
+                    data: { 'community_area': community_area_id, 'related': 1 },
                 });
             });
         }

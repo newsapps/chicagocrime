@@ -4,7 +4,9 @@ define([ 'jquery', 'backbone' ], function($, Backbone) {
 
     var CrimeCollection = Backbone.Collection.extend({
         sync: function(method, model, options) {
-            // Override default sync method to use jsonp for portability
+            // Override default sync method to use jsonp for portability and fire
+            // event
+            this.trigger("fetch");
             var params = _.extend({
                 type: 'GET',
                 dataType: 'jsonp',
