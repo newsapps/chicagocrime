@@ -4,9 +4,9 @@ Sample app and documentation for the Chicago Tribune's Chicago Crime API.
 
 ## Getting started with the Chicago Crime API
 
-Get JSONView for [Chrome](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en) or [Firefox](https://addons.mozilla.org/EN-us/firefox/addon/jsonview/)
+**[Read the API documentation](https://github.com/newsapps/chicagocrime/blob/master/api_docs.md)**
 
-[**API documentation: **](https://github.com/newsapps/chicagocrime/blob/master/api_docs.md)
+Before running queries, get the JSONView plugin for [Chrome](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en) or [Firefox](https://addons.mozilla.org/EN-us/firefox/addon/jsonview/)
 
 Sample queries:
 
