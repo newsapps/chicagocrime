@@ -20,7 +20,6 @@ define([
             // Replace HTML with contents of template. Takes optional
             // `context` parameter to pass to template.
             this.$el.html(this.template(context));
-            this.$el.css('min-height', ($(window).height() - 100) + 'px');
             return this;
         },
         show: function() {

@@ -13,9 +13,11 @@ define([ 'jquery', 'backbone', 'collections/DateSummaryCollection', 'views/PageV
             var homePageView = new PageView({template: 'templates/home.jst', 'id': 'home-page'});
             $('#content').append(homePageView.$el);
 
+            // Community area list view
             var communityAreaListView = new CommunityAreaListView();
             $('#content').append(communityAreaListView.$el);
 
+            // Community area daily summary detail view
             var dateSummaryCollection = new DateSummaryCollection();
             var communityAreaDetailView = new CommunityAreaDetailView({ collection: dateSummaryCollection });
             $('#content').append(communityAreaDetailView.$el);
