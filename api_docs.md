@@ -98,7 +98,7 @@ API response.
 
 http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=jsonp&limit=1&year=2013&community_area=16&related=1 yields:
 
-```
+```json
 meta: {
     community_area: {
         adjacent_area_numbers: "4,5,12,14,15,19,20,21"
@@ -122,7 +122,7 @@ meta: {
     offset: 0
     previous: null
     total_count: 72
-}
+},
 objects: [
     {
         arson: 0
