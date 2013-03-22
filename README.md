@@ -10,11 +10,10 @@ Before running queries, get the JSONView plugin for [Chrome](https://chrome.goog
 
 Sample queries:
 
-* **2013 daily crime summary for community area 32, with community area meta**
-http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=json&limit=0&year=2013&community_area=32&related=1
-* Daily crime summary for all community areas in January 2013: http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=json&crime_date__gte=2013-01-01&&crime_date__lt=2013-02-01
-* Community areas, JSONP format: http://crime.chicagotribune.com/api/1.0-beta1/communityarea/?format=jsonp&limit=0
-* Crime classifications as a CSV: http://crime.chicagotribune.com/api/1.0-beta1/crimeclassification/?format=csv&limit=0
+* **2013 daily crime summary for community area 32, with community area meta:**<br />http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=json&limit=0&year=2013&community_area=32&related=1
+* **Daily crime summary for all community areas in January 2013:**<br />http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=json&crime_date__gte=2013-01-01&&crime_date__lt=2013-02-01
+* **Community areas, JSONP format:**<br />http://crime.chicagotribune.com/api/1.0-beta1/communityarea/?format=jsonp&limit=0
+* **Crime classifications as a CSV:**<br />http://crime.chicagotribune.com/api/1.0-beta1/crimeclassification/?format=csv&limit=0
 
 ## Installing and using the front end app
 
