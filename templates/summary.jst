@@ -1,5 +1,5 @@
 <p>
-  In <%= community.wikipedia %> for the month of <%= totals_month %> crimes were reported, a <%= (totals_month - totals_prior_year_month)/totals_month %>% change compared to the same month last year.
+  In <%= community.wikipedia %> for the month of <%= totals_month %> crimes were reported, a <%= Math.round(((totals_month - totals_prior_year_month)/totals_month)*100)/100 %> percent change compared to the same month last year, which had <%= totals_prior_year_month %> reported crimes. 
 </p>
 
 <p><% month_crimes.robbery + month_crimes.battery + month_crimes.assault + month_crimes.homicide + month_crimes.criminal_sexual_assault %> violents crimes were reported, which is a <% ((month_crimes.robbery + month_crimes.battery + month_crimes.assault + month_crimes.homicide + month_crimes.criminal_sexual_assault)-( prior_year_month_crimes.robbery + prior_year_month_crimes.battery + prior_year_month_crimes.assault + prior_year_month_crimes.homicide + prior_year_month_crimes.criminal_sexual_assault ))/(prior_year_month_crimes.robbery + prior_year_month_crimes.battery + prior_year_month_crimes.assault + prior_year_month_crimes.homicide + prior_year_month_crimes.criminal_sexual_assault) %> percent change compared to the same month last year.</p> 
