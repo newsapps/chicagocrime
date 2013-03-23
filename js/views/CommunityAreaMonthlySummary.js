@@ -58,9 +58,14 @@ function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView,
         },
 
         render: function() {
+            var month = this.sums(this.summary),
+                prior = this.sums(this.prior_year);
+
             this.$el.append(this.template({
-                month: this.sums(this.summary),
-                prior: this.sums(this.prior_year)
+                month: month,
+                prior: prior,
+                totals: this.total_crimes(month),
+                totals_prior: this.total_crimes(prior)
             }));
 
             $('#content').append(this.$el);
@@ -85,6 +90,16 @@ function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView,
             });
 
             return sums;
+        },
+
+        total_crimes: function(sums_obj) {
+            var total = 0;
+
+            _.each(_.values(sums_obj), function(v) {
+                total += v;
+            });
+
+            return total;
         }
 
     });
