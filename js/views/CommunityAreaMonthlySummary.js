@@ -2,6 +2,7 @@ define([
     'jquery',
     'backbone',
     'collections/DateSummaryCollection',
+    'collections/CommunityAreaCollection',
     'views/PageView',
     'views/CommunityAreaListView',
     'views/CommunityAreaDetailView',
@@ -9,8 +10,9 @@ define([
     'views/DocDetailView',
     'text!templates/summary.jst'
 ],
-function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView,
-         CommunityAreaDetailView, DocListView, DocDetailView, SummaryTemplate) {
+function($, Backbone, DateSummaryCollection, CommunityAreaCollection, PageView,
+         CommunityAreaListView, CommunityAreaDetailView, DocListView, DocDetailView,
+         SummaryTemplate) {
 
     var CommunityAreaMonthlySummary = Backbone.View.extend({
 
@@ -49,7 +51,12 @@ function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView,
                             'crime_date__lt': '2012-' + end + '-01 00:00',
                             'limit': 0
                         },
-                        success: _.bind(this.render, this)
+                        success: _.bind(function() {
+                            this.community_areas = new CommunityAreaCollection();
+                            this.community_areas.fetch({
+                                success: _.bind(this.render, this)
+                            });
+                        }, this)
                     });
                 }, this)
             });
@@ -59,9 +66,14 @@ function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView,
 
         render: function() {
             var month = this.sums(this.summary),
-                prior = this.sums(this.prior_year);
+                prior = this.sums(this.prior_year),
+                community = this.community_areas.filter(_.bind(function(x) {
+                    if ( x.get('area_number') == this.options.community )
+                        return x;
+                }, this))[0];
 
             this.$el.append(this.template({
+                community: community.attributes,
                 month: month,
                 prior: prior,
                 totals: this.total_crimes(month),
