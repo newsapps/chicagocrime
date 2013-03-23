@@ -80,6 +80,7 @@ function($, Backbone, DateSummaryCollection, CommunityAreaCollection, PageView,
 
             console.log(month_crimes)
 
+            this.$el.empty();
             this.$el.append(this.template({
                 community: community.attributes,
                 month_crimes: month_crimes,
@@ -89,6 +90,7 @@ function($, Backbone, DateSummaryCollection, CommunityAreaCollection, PageView,
                 totals_prior_year_month: this.total_crimes(prior_year_month_crimes)
             }));
 
+            $('#content').empty();
             $('#content').append(this.$el);
         },
 
