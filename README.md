@@ -1,4 +1,4 @@
-# Chicago Crime
+# Chicago Crime 
 
 Sample app and documentation for the Chicago Tribune's Chicago Crime API.
 
