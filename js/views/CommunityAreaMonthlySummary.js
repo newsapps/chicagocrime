@@ -16,6 +16,13 @@ function($, Backbone, DateSummaryCollection, CommunityAreaCollection, PageView,
 
     var CommunityAreaMonthlySummary = Backbone.View.extend({
 
+        month_from_number: function(month) {
+            var months = [ "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December" ]
+
+            return months[month]
+        },
+
         initialize: function() {
             var month, end;
 
@@ -65,19 +72,21 @@ function($, Backbone, DateSummaryCollection, CommunityAreaCollection, PageView,
         },
 
         render: function() {
-            var month = this.sums(this.summary),
-                prior = this.sums(this.prior_year),
-                community = this.community_areas.find(_.bind(function(x) {
-                    if ( x.get('area_number') == this.options.community )
-                        return x;
-                }, this));
+            var month_crimes = this.sums(this.summary);
+            var prior_year_month_crimes = this.sums(this.prior_year);
+            var community = this.community_areas.find(_.bind(function(x) {
+                return x.get('area_number') == this.options.community 
+            }, this));
+
+            console.log(month_crimes)
 
             this.$el.append(this.template({
                 community: community.attributes,
-                month: month,
-                prior: prior,
-                totals: this.total_crimes(month),
-                totals_prior: this.total_crimes(prior)
+                month_crimes: month_crimes,
+                prior_year_month_crimes: prior_year_month_crimes,
+                month_name: this.month_from_number(this.options.month),
+                totals_month: this.total_crimes(month_crimes),
+                totals_prior_year_month: this.total_crimes(prior_year_month_crimes)
             }));
 
             $('#content').append(this.$el);

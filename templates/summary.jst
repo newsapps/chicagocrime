@@ -1,22 +1,24 @@
-<p>In <%= name %> for the month of MONTH, <% (month.robbery + month.battery + month.assault + month.homicide + month.criminal_sexual_assault + month.theft + month.burglary + month.motor_vehicle_theft + month.arson + month.criminal_damage + month.narcotics + month.prostitution) %> crimes were reported, a <% ((month.robbery + month.battery + month.assault + month.homicide + month.criminal_sexual_assault + month.theft + month.burglary + month.motor_vehicle_theft + month.arson + month.criminal_damage + month.narcotics + month.prostitution) - (prior.robbery + prior.battery + prior.assault + prior.homicide + prior.criminal_sexual_assault + prior.theft + prior.burglary + prior.motor_vehicle_theft + prior.arson + prior.criminal_damage + prior.narcotics + prior.prostitution)) / (prior.robbery + prior.battery + prior.assault + prior.homicide + prior.criminal_sexual_assault + prior.theft + prior.burglary + prior.motor_vehicle_theft + prior.arson + prior.criminal_damage + prior.narcotics + prior.prostitution) %> change compared to the same month last year.</p>
+<p>
+  In <%= community.wikipedia %> for the month of <%= totals_month %> crimes were reported, a <%= (totals_month - totals_prior_year_month)/totals_month %>% change compared to the same month last year.
+</p>
 
-<p><% month.robbery + month.battery + month.assault + month.homicide + month.criminal_sexual_assault %> violents crimes were reported, which is a <% ((month.robbery + month.battery + month.assault + month.homicide + month.criminal_sexual_assault)-( prior.robbery + prior.battery + prior.assault + prior.homicide + prior.criminal_sexual_assault ))/(prior.robbery + prior.battery + prior.assault + prior.homicide + prior.criminal_sexual_assault) %> percent change compared to the same month last year.</p> 
+<p><% month_crimes.robbery + month_crimes.battery + month_crimes.assault + month_crimes.homicide + month_crimes.criminal_sexual_assault %> violents crimes were reported, which is a <% ((month_crimes.robbery + month_crimes.battery + month_crimes.assault + month_crimes.homicide + month_crimes.criminal_sexual_assault)-( prior_year_month_crimes.robbery + prior_year_month_crimes.battery + prior_year_month_crimes.assault + prior_year_month_crimes.homicide + prior_year_month_crimes.criminal_sexual_assault ))/(prior_year_month_crimes.robbery + prior_year_month_crimes.battery + prior_year_month_crimes.assault + prior_year_month_crimes.homicide + prior_year_month_crimes.criminal_sexual_assault) %> percent change compared to the same month last year.</p> 
 
-<p><% month.theft + month.burglary + month.motor_vehicle_theft + month.arson %> property crimes were reported, which is a <% (( month.theft + month.burglary + month.motor_vehicle_theft + month.arson ) - ( prior.theft + prior.burglary + prior.motor_vehicle_theft + prior.arson ))/( prior.theft + prior.burglary + prior.motor_vehicle_theft + prior.arson ) %> percent change compared to the same month last year.</p>
+<p><% month_crimes.theft + month_crimes.burglary + month_crimes.motor_vehicle_theft + month_crimes.arson %> property crimes were reported, which is a <% (( month_crimes.theft + month_crimes.burglary + month_crimes.motor_vehicle_theft + month_crimes.arson ) - ( prior_year_month_crimes.theft + prior_year_month_crimes.burglary + prior_year_month_crimes.motor_vehicle_theft + prior_year_month_crimes.arson ))/( prior_year_month_crimes.theft + prior_year_month_crimes.burglary + prior_year_month_crimes.motor_vehicle_theft + prior_year_month_crimes.arson ) %> percent change compared to the same month last year.</p>
 
-<p><% month.criminal_damage + month.narcotics + month.prostitution %> quality-of-life crimes were reported, which is a <% (( month.criminal_damage + month.narcotics + month.prostitution ) - ( prior.criminal_damage + prior.narcotics + prior.prostitution ))/( prior.criminal_damage + prior.narcotics + prior.prostitution ) %> percent change compared to the same month last year.</p>
+<p><% month_crimes.criminal_damage + month_crimes.narcotics + month_crimes.prostitution %> quality-of-life crimes were reported, which is a <% (( month_crimes.criminal_damage + month_crimes.narcotics + month_crimes.prostitution ) - ( prior_year_month_crimes.criminal_damage + prior_year_month_crimes.narcotics + prior_year_month_crimes.prostitution ))/( prior_year_month_crimes.criminal_damage + prior_year_month_crimes.narcotics + prior_year_month_crimes.prostitution ) %> percent change compared to the same month last year.</p>
 
 <p>None of the following crimes were reported in this community area: 
-<% if (month.arson = 0) {%> arson <% } %>} 
-<% if (month.assault = 0) {%> assault; <% } %>} 
-<% if (month.burglary = 0) {%> burglary <% } %>} 
-<% if (month.criminal_damage = 0) {%> criminal damage <% } %>} 
-<% if (month.homicide = 0) {%> homicide <% } %>} 
-<% if (month.motor_vehicle_theft = 0) {%> motor vehicle theft <% } %>} 
-<% if (month.prostitution = 0) {%> prostitution <% } %>} 
-<% if (month.robbery = 0) {%> robbery <% } %>} 
-<% if (month.sexual_assault = 0) {%> sexual assault <% } %>} 
-<% if (month.theft = 0) {%> theft <% } %>} 
+<% if (month_crimes.arson = 0) {%> arson <% } %>} 
+<% if (month_crimes.assault = 0) {%> assault; <% } %>} 
+<% if (month_crimes.burglary = 0) {%> burglary <% } %>} 
+<% if (month_crimes.criminal_damage = 0) {%> criminal damage <% } %>} 
+<% if (month_crimes.homicide = 0) {%> homicide <% } %>} 
+<% if (month_crimes.motor_vehicle_theft = 0) {%> motor vehicle theft <% } %>} 
+<% if (month_crimes.prostitution = 0) {%> prostitution <% } %>} 
+<% if (month_crimes.robbery = 0) {%> robbery <% } %>} 
+<% if (month_crimes.sexual_assault = 0) {%> sexual assault <% } %>} 
+<% if (month_crimes.theft = 0) {%> theft <% } %>} 
 </p>
 
 <p>This information is gathered from the City of Chicago data portal and calculated by the Chicago Tribune.</p>
