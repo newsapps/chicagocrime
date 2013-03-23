@@ -67,10 +67,10 @@ function($, Backbone, DateSummaryCollection, CommunityAreaCollection, PageView,
         render: function() {
             var month = this.sums(this.summary),
                 prior = this.sums(this.prior_year),
-                community = this.community_areas.filter(_.bind(function(x) {
+                community = this.community_areas.find(_.bind(function(x) {
                     if ( x.get('area_number') == this.options.community )
                         return x;
-                }, this))[0];
+                }, this));
 
             this.$el.append(this.template({
                 community: community.attributes,
