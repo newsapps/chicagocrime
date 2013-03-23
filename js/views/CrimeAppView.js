@@ -1,7 +1,9 @@
 define([ 'jquery', 'backbone', 
          'collections/DateSummaryCollection', 
-         'views/PageView', 'views/CommunityAreaListView', 'views/CommunityAreaDetailView', 'views/DocListView', 'views/DocDetailView' ], 
-function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView, CommunityAreaDetailView, DocListView, DocDetailView) {
+         'views/PageView', 'views/CommunityAreaListView',
+         'views/CommunityAreaDetailView', 'views/DocListView',
+         'views/DocDetailView', 'views/CommunityAreaMonthlySummary' ], 
+function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView, CommunityAreaDetailView, DocListView, DocDetailView, CommunityAreaMonthlySummary) {
 
     var CrimeAppView = Backbone.View.extend({
         id: 'content',
@@ -74,6 +76,13 @@ function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView, Co
             this.router.on('route:doc_view', function(doc) {
                 console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: `doc_detail` route triggered.');
                 docDetailView.show(doc);
+            });
+
+            this.router.on('route:monthly_summary', function(month_num, community_num) {
+                new CommunityAreaMonthlySummary({
+                    month: month_num,
+                    community: community_num
+                });
             });
         }
     });
