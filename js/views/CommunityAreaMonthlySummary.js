@@ -89,12 +89,14 @@ function($, Backbone, DateSummaryCollection, CommunityAreaCollection, PageView,
                 "narcotics", "prostitution", "robbery", "sexual_assault",
                 "theft"];
 
-            var violent_crimes = ["robbery", "battery", "assault", "homicide", 
+            var violent_crimes = ["robbery", "battery", "assault", "homicide",
                 "criminal_sexual_assault"];
 
-            var property_crimes = ["theft", "burglary", "motor_vehicle_theft", "arson"];
+            var property_crimes = ["theft", "burglary", "motor_vehicle_theft",
+                "arson"];
 
-            var quality_of_life_crimes = ["criminal_damage", "narcotics", "prostitution"];
+            var quality_of_life_crimes = ["criminal_damage", "narcotics",
+                "prostitution"];
 
             var sums = {};
 
@@ -108,30 +110,32 @@ function($, Backbone, DateSummaryCollection, CommunityAreaCollection, PageView,
                 });
 
                 _.each(violent_crimes, function(i) {
-                    if ( !sums["violent_crimes"] ) {
-                        sums["violent_crimes"] = parseInt(val.get(i), 10);
+                    if ( !sums.violent_crimes ) {
+                        sums.violent_crimes = parseInt(val.get(i), 10);
                     } else {
-                        sums["violent_crimes"] += parseInt(val.get(i), 10);
+                        sums.violent_crimes += parseInt(val.get(i), 10);
                     }
+                });
 
                 _.each(property_crimes, function(i) {
-                    if ( !sums["property_crimes"] ) {
-                        sums["property_crimes"] = parseInt(val.get(i), 10);
+                    if ( !sums.property_crimes ) {
+                        sums.property_crimes = parseInt(val.get(i), 10);
                     } else {
-                        sums["property_crimes"] += parseInt(val.get(i), 10);
+                        sums.property_crimes += parseInt(val.get(i), 10);
                     }
                 });
 
-                _.each(violent_crimes, function(i) {
-                    if ( !sums["quality_of_life_crimes"] ) {
-                        sums["quality_of_life_crimes"] = parseInt(val.get(i), 10);
+                _.each(quality_of_life_crimes, function(i) {
+                    if ( !sums.quality_of_life_crimes ) {
+                        sums.quality_of_life_crimes = parseInt(val.get(i), 10);
                     } else {
-                        sums["quality_of_life_crimes"] += parseInt(val.get(i), 10);
+                        sums.quality_of_life_crimes += parseInt(val.get(i), 10);
                     }
                 });
-
 
             });
+
+            console.log(sums);
 
             return sums;
         },
