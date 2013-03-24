@@ -7,35 +7,27 @@ define([
 ], function($, _, Backbone, ListTemplate) {
 
     var DocListView = Backbone.View.extend({
-        id: 'doc-list',
+        docs: ['api_docs.md', 'frontend_development.md'],
         initialize: function(options) {
-            this.docs = options.docs;
             this.template = _.template(ListTemplate);
             this.render();
         },
-        render: function(context) {
-            var rows = [];
-            _.each(this.docs, function(row) {
-                var title = row.split('.').shift().replace(/_/g, " ");
-                rows.push({
+        render: function() {
+            var links = [];
+            _.each(this.docs, function(doc) {
+                var title = doc.split('.').shift().replace(/_/g, " ");
+                links.push({
                     label: title.charAt(0).toUpperCase() + title.slice(1),
-                    link: '#docs/' + row
+                    link: '#docs/' + doc
                 });
             });
             this.$el.html(this.template({
                 'title': 'Documentation',
-                'rows': rows
+                'rows': links
             }));
+            $("#loading").hide()
             return this;
-        },
-        show: function() {
-            this.$el.show();
-            return this;
-        },
-        hide: function() {
-            this.$el.hide();
-            return this;
-        }
+        }    
     });
 
     return DocListView;

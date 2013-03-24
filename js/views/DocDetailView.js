@@ -6,35 +6,16 @@ define([
 ], function($, _, Backbone) {
 
     var DocDetailView = Backbone.View.extend({
-        id: 'doc-detail',
         initialize: function(options) {
-            // Render docs. @TODO split out into view?
-            var detail = this;
+            this.doc_id = options.doc_id;
+            this.render();
+        },
+        render: function(){ //Convention
             this.$el.append("<h1>Documentation</h1>")
-            _.each(options.docs, function(path) {
-                var id = path.split('.').shift();
-                var el = $('<div>')
-                    .attr('id', id)
-                    .attr('class', 'doc-item')
-                    .hide()
-                    .appendTo(detail.$el);
-
-                require(['text!docs/' + path], function(doc) {
-                    el.html($('<pre>' + doc + '</pre>'))
-                });
+            var el = $('<div>').hide().appendTo(this.$el);
+            require(['text!docs/' + this.doc_id], function(doc) {
+                el.html($('<pre>' + doc + '</pre>')).show()
             });
-
-        },
-        show: function(path) {
-            this.$el.show();
-            var id = path.split('.').shift();
-            $('#' + id).show();
-            return this;
-        },
-        hide: function() {
-            this.$el.find('.doc-item').hide();
-            this.$el.hide();
-            return this;
         }
     });
 

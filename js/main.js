@@ -15,7 +15,8 @@ require.config({
         spin: 'http://cdnjs.cloudflare.com/ajax/libs/spin.js/1.2.7/spin.min',
         templates: '../templates',
         text: '../lib/text',
-        underscore: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore'
+        underscore: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore',
+        async: '../lib/async'
     },
     shim: {
         spin: {
