@@ -10,6 +10,7 @@ define([
         initialize: function(options) {
             // Render docs. @TODO split out into view?
             var detail = this;
+            this.$el.append("<h1>Documentation</h1>")
             _.each(options.docs, function(path) {
                 var id = path.split('.').shift();
                 var el = $('<div>')
