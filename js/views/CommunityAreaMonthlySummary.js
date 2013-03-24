@@ -1,8 +1,6 @@
 define([
     'jquery',
     'backbone',
-    'collections/DateSummaryCollection',
-    'collections/CommunityAreaCollection',
     'views/PageView',
     'views/CommunityAreaListView',
     'views/CommunityAreaDetailView',
@@ -10,65 +8,24 @@ define([
     'views/DocDetailView',
     'text!templates/summary.jst'
 ],
-function($, Backbone, DateSummaryCollection, CommunityAreaCollection, PageView,
+function($, Backbone, PageView,
          CommunityAreaListView, CommunityAreaDetailView, DocListView, DocDetailView,
          SummaryTemplate) {
 
     var CommunityAreaMonthlySummary = Backbone.View.extend({
+
+        initialize: function(options){
+            this.template = _.template(SummaryTemplate);
+            this.summary = options.summary; //for legacy 
+            this.prior_year = options.prior; 
+            this.community_areas = options.community_areas;
+        },
 
         month_from_number: function(month) {
             var months = [ "January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December" ]
 
             return months[month]
-        },
-
-        initialize: function() {
-            var month, end;
-
-            if ( parseInt(this.options.month, 10) > 9 ) {
-                month = this.options.month;
-                end = (parseInt(this.options.month, 10) + 1) % 12;
-            } else {
-                month = '0' + this.options.month;
-                end = (parseInt(this.options.month, 10) + 1) % 12;
-            }
-
-            if ( parseInt(end, 10) < 9 )
-                end = '0' + end;
-
-            this.template = _.template(SummaryTemplate);
-
-            this.summary = new DateSummaryCollection();
-            this.summary.fetch({
-                data: {
-                    'community_area': this.options.community,
-                    'related': 1,
-                    'crime_date__gte': '2013-' + month  + '-01 00:00',
-                    'crime_date__lt': '2013-' + end + '-01 00:00',
-                    'limit': 0
-                },
-                success: _.bind(function() {
-                    this.prior_year = new DateSummaryCollection();
-                    this.prior_year.fetch({
-                        data: {
-                            'community_area': this.options.community,
-                            'related': 1,
-                            'crime_date__gte': '2012-' + month  + '-01 00:00',
-                            'crime_date__lt': '2012-' + end + '-01 00:00',
-                            'limit': 0
-                        },
-                        success: _.bind(function() {
-                            this.community_areas = new CommunityAreaCollection();
-                            this.community_areas.fetch({
-                                success: _.bind(this.render, this)
-                            });
-                        }, this)
-                    });
-                }, this)
-            });
-
-            return this;
         },
 
         render: function() {
@@ -87,9 +44,6 @@ function($, Backbone, DateSummaryCollection, CommunityAreaCollection, PageView,
                 totals_month: this.total_crimes(month_crimes),
                 totals_prior_year_month: this.total_crimes(prior_year_month_crimes)
             }));
-
-            $('#content').empty();
-            $('#content').append(this.$el);
         },
 
         aggregate_crimes: function(collection) {
@@ -155,6 +109,17 @@ function($, Backbone, DateSummaryCollection, CommunityAreaCollection, PageView,
             });
 
             return total;
+        },
+        show: function(options) {
+            this.options = options
+            this.render()
+            this.$el.show();
+            return this;
+        },
+        hide: function() {
+            this.$el.empty();
+            this.$el.hide();
+            return this;
         }
 
     });
