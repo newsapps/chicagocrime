@@ -1,49 +1,107 @@
-define([
-    'jquery',
-    'backbone',
-    'views/PageView',
-    'views/CommunityAreaListView',
-    'views/CommunityAreaDetailView',
-    'views/DocListView',
-    'views/DocDetailView',
-    'text!templates/summary.jst'
-],
-function($, Backbone, PageView,
-         CommunityAreaListView, CommunityAreaDetailView, DocListView, DocDetailView,
-         SummaryTemplate) {
+define(['jquery','backbone', 'async','collections/DateSummaryCollection','text!templates/summary.jst'],function($, Backbone, async, DateSummaryCollection, SummaryTemplate) {
 
     var CommunityAreaMonthlySummary = Backbone.View.extend({
 
         initialize: function(options){
             this.template = _.template(SummaryTemplate);
-            this.summary = options.summary; //for legacy 
-            this.prior_year = options.prior; 
-            this.community_areas = options.community_areas;
+            
+            //Options
+            this.month = options.month;
+            this.year = (new Date()).getFullYear();
+            this.community_area_id = options.community_area_id;
+
+            //Set up the collections
+            this.monthCrimesCollection = new DateSummaryCollection();
+            this.priorYearMonthCrimes = new DateSummaryCollection();
+            this.loaded = false;
+
+            //Binding
+            this.bind('loaded',function(){
+                this.loaded = true;
+                this.render();
+            },this);
+            
+            this.load_data();
+            this.render();
+        },
+
+        load_data: function(){
+            var view = this;
+
+            function fix_month(month){
+                month = String(month)
+                if (month.length == 2){
+                    return month
+                } 
+                return "0" + month
+            }
+
+            var end_month = Number(view.month) + 1
+            var year = view.year;
+
+            if(end_month > 12){
+                end_month = 1;
+                year = year + 1;
+            }
+
+            start_month = fix_month(view.month)
+            end_month = fix_month(end_month)
+
+            async.parallel({
+                this_year: function(cb_p){
+                    view.monthCrimesCollection.fetch({
+                        data: {
+                            'community_area': view.community_area_id,
+                            'related': 1,
+                            'crime_date__gte': year + '-' + start_month  + '-01 00:00',
+                            'crime_date__lt' : year + '-' + end_month + '-01 00:00',
+                            'limit': 0
+                        },
+                        success: function(){ cb_p() }
+                    })
+                },
+                last_year: function(cb_p){
+                    view.priorYearMonthCrimes.fetch({
+                        data: {
+                            'community_area': view.community_area_id,
+                            'related': 1,
+                            'crime_date__gte': (year - 1) + '-' + start_month  + '-01 00:00',
+                            'crime_date__lt': (year - 1) + '-' + end_month + '-01 00:00',
+                            'limit': 0
+                        },
+                        success: function(){ cb_p() }
+                    })
+                }
+            },function(err, results){
+                view.community = view.monthCrimesCollection.meta.community_area
+                view.trigger("loaded")
+            })
         },
 
         month_from_number: function(month) {
             var months = [ "January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December" ]
 
-            return months[month]
+            return months[month - 1]
         },
 
         render: function() {
-            var month_crimes = this.aggregate_crimes(this.summary);
-            var prior_year_month_crimes = this.aggregate_crimes(this.prior_year);
-            var community = this.community_areas.find(_.bind(function(x) {
-                return x.get('area_number') == this.options.community 
-            }, this));
+            console.log('CHICAGO CRIME [js/views/CommunityAreaMonthlySummary.js]: Render summery.');
+            this.$el.empty() //Clear out the content
+            if (!this.loaded){ 
+                return this; //Don't add anything if nothing is loaded
+            }
 
+            var month_aggregate = this.aggregate_crimes(this.monthCrimesCollection);
+            var prior_year_month_aggregate = this.aggregate_crimes(this.priorYearMonthCrimes);
 
-            this.$el.empty();
             this.$el.append(this.template({
-                community: community.attributes,
-                month_crimes: month_crimes,
-                prior_year_month_crimes: prior_year_month_crimes,
-                month_name: this.month_from_number(Number(this.options.month)),
-                totals_month: this.total_crimes(month_crimes),
-                totals_prior_year_month: this.total_crimes(prior_year_month_crimes)
+                community: this.community,
+                month_crimes: month_aggregate,
+                prior_year_month_crimes: prior_year_month_aggregate,
+                month_name: this.month_from_number(Number(this.month)),
+                totals_month: this.total_crimes(month_aggregate),
+                totals_prior_year_month: this.total_crimes(prior_year_month_aggregate)
             }));
         },
 
@@ -102,27 +160,13 @@ function($, Backbone, PageView,
             return results;
         },
 
-        total_crimes: function(sums_obj) {
+        total_crimes: function(aggregate_crimes) { //Count the total number of crimes in an aggregate.
             var total = 0;
-
-            _.each(_.values(sums_obj.crimes), function(v) {
+            _.each(_.values(aggregate_crimes.crimes), function(v) {
                 total += v.count;
             });
-
             return total;
-        },
-        show: function(options) {
-            this.options = options
-            this.render()
-            this.$el.show();
-            return this;
-        },
-        hide: function() {
-            this.$el.empty();
-            this.$el.hide();
-            return this;
         }
-
     });
 
     return CommunityAreaMonthlySummary;
