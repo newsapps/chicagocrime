@@ -1,7 +1,10 @@
-define([ 'jquery', 'backbone', 
+define([ 'jquery', 'backbone', 'async',
          'collections/DateSummaryCollection', 
-         'views/PageView', 'views/CommunityAreaListView', 'views/CommunityAreaDetailView', 'views/DocListView', 'views/DocDetailView' ], 
-function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView, CommunityAreaDetailView, DocListView, DocDetailView) {
+         'collections/CommunityAreaCollection', 
+         'views/PageView', 'views/CommunityAreaListView',
+         'views/CommunityAreaDetailView', 'views/DocListView',
+         'views/DocDetailView', 'views/CommunityAreaMonthlySummary' ], 
+function($, Backbone, async, DateSummaryCollection, CommunityAreaCollection, PageView, CommunityAreaListView, CommunityAreaDetailView, DocListView, DocDetailView, CommunityAreaMonthlySummary) {
 
     var CrimeAppView = Backbone.View.extend({
         id: 'content',
@@ -31,6 +34,12 @@ function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView, Co
             var docDetailView = new DocDetailView({'docs': docs});
             $('#content').append(docDetailView.$el);
 
+            var thisYearCollection = new DateSummaryCollection() //This is so wrong. 
+            var priorYearCollection = new DateSummaryCollection() //This is so wrong. 
+            var communityAreaCollection = new CommunityAreaCollection() //This is so wrong. Shouldn't be passing in a collection. Or anything for that matter..
+            var communityAreaMonthlySummary = new CommunityAreaMonthlySummary({ summary: thisYearCollection, prior: priorYearCollection, community_areas: communityAreaCollection });
+            $('#content').append(communityAreaMonthlySummary.$el);
+
             // Size all containers
             $('#content > div').css('min-height', ($(window).height() - 100) + 'px');
             
@@ -42,6 +51,7 @@ function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView, Co
                 communityAreaDetailView.hide();
                 docListView.hide();
                 docDetailView.hide();
+                communityAreaMonthlySummary.hide()
             });
 
             this.router.on('route:home', function(community_area_id) {
@@ -74,6 +84,64 @@ function($, Backbone, DateSummaryCollection, PageView, CommunityAreaListView, Co
             this.router.on('route:doc_view', function(doc) {
                 console.log('CHICAGO CRIME [js/views/CrimeAppView.js]: `doc_detail` route triggered.');
                 docDetailView.show(doc);
+            });
+
+            this.router.on('route:monthly_summary', function(community_num,month_num) {
+                var month, end;
+
+                function fix_month(month){
+                    month = String(month)
+                    if (month.length == 2){
+                        return month
+                    } 
+                    return "0" + month
+                }
+
+                var year = (new Date()).getFullYear()
+                var start_month = Number(month_num) //Use 0-11 instead of 1-12
+                var end_month = start_month + 1
+
+                if(end_month > 12){
+                    end_month = 1;
+                    year = year + 1;
+                }
+
+                start_month = fix_month(start_month)
+                end_month = fix_month(end_month)
+
+                async.parallel({
+                    this_year: function(cb_p){
+                        thisYearCollection.fetch({
+                            data: {
+                                'community_area': community_num,
+                                'related': 1,
+                                'crime_date__gte': year + '-' + start_month  + '-01 00:00',
+                                'crime_date__lt' : year + '-' + end_month + '-01 00:00',
+                                'limit': 0
+                            },
+                            success: function(){ cb_p() }
+                        })
+                    },
+                    last_year: function(cb_p){
+                        priorYearCollection.fetch({
+                            data: {
+                                'community_area': community_num,
+                                'related': 1,
+                                'crime_date__gte': (year - 1) + '-' + start_month  + '-01 00:00',
+                                'crime_date__lt': (year - 1) + '-' + end_month + '-01 00:00',
+                                'limit': 0
+                            },
+                            success: function(){ cb_p() }
+                        })
+                    },
+                    community: function(cb_p){
+                        communityAreaCollection.fetch({
+                            success: function(){ cb_p() }
+                        })
+                    }
+                },function(err, results){
+                    communityAreaMonthlySummary.show({community:community_num,month:start_month - 1});
+                })
             });
         }
     });
