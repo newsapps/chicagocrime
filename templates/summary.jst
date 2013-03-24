@@ -1,15 +1,15 @@
 <p>
   In <%= community.wikipedia %> for the month of 
   <%= totals_month %> crimes were reported, a 
-  <%= ((totals_month - totals_prior_year_month)/totals_month).toFixed(2) %>% 
+  <%= ((totals_month - totals_prior_year_month)/totals_month*100).toFixed(2) %>% 
   <% if(totals_month > totals_prior_year_month){ %>increase<% } else {%> decrease <% } %> 
-  compared to the same month last year.
+  compared to the same month last year, which had <%= totals_prior_year_month %> reported crimes.
 </p>
 
 <% _.each(month_crimes.crimes,function(values, name){ %>
   <p>
     <%= values.count %> <%= values.name %> were reported a 
-    <%= ((values.count - prior_year_month_crimes.crimes[name].count)/values.count).toFixed(2) %>% 
+    <%= ((values.count - prior_year_month_crimes.crimes[name].count)/values.count*100).toFixed(2) %>% 
      <% if(values.count > prior_year_month_crimes.crimes[name].count){ %>increase<% } else {%> decrease <% } %> 
      compared to the same month last year.
   </p>

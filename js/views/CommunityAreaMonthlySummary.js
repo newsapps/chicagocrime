@@ -150,7 +150,7 @@ function($, Backbone, DateSummaryCollection, CommunityAreaCollection, PageView,
         total_crimes: function(sums_obj) {
             var total = 0;
 
-            _.each(_.values(sums_obj), function(v) {
+            _.each(_.values(sums_obj.crimes), function(v) {
                 total += v.count;
             });
 
