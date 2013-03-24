@@ -12,7 +12,7 @@ define([
             this.template = _.template(ListTemplate);
             this.render();
         },
-        render: function(context) {
+        render: function() {
             var links = [];
             _.each(this.docs, function(doc) {
                 var title = doc.split('.').shift().replace(/_/g, " ");
@@ -25,6 +25,7 @@ define([
                 'title': 'Documentation',
                 'rows': links
             }));
+            $("#loading").hide()
             return this;
         }    
     });
