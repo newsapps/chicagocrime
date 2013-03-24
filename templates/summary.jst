@@ -1,5 +1,6 @@
+<h1>Summery of <%= month_name %></h1>
 <p>
-  In <%= community.wikipedia %> for the month of 
+  In <%= community.wikipedia %> for the month of <%= month_name %> 
   <%= totals_month %> crimes were reported, a 
   <%= ((totals_month - totals_prior_year_month)/totals_month*100).toFixed(2) %>% 
   <% if(totals_month > totals_prior_year_month){ %>increase<% } else {%> decrease <% } %> 
@@ -25,6 +26,6 @@
   <%= last_crime %> crimes reported this month.
 </p>
 
-<p>This information is gathered from the City of Chicago data portal and calculated by the Chicago Tribune.</p>
+<small>This information is gathered from the City of Chicago data portal and calculated by the Chicago Tribune.</small>
 
 

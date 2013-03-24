@@ -131,7 +131,7 @@ function($, Backbone, async, DateSummaryCollection, CommunityAreaCollection, Pag
                         })
                     }
                 },function(err, results){
-                    communityAreaMonthlySummary.show({community:community_num});
+                    communityAreaMonthlySummary.show({community:community_num,month:month});
                 })
             });
         }

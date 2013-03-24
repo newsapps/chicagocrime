@@ -35,12 +35,13 @@ function($, Backbone, PageView,
                 return x.get('area_number') == this.options.community 
             }, this));
 
+
             this.$el.empty();
             this.$el.append(this.template({
                 community: community.attributes,
                 month_crimes: month_crimes,
                 prior_year_month_crimes: prior_year_month_crimes,
-                month_name: this.month_from_number(this.options.month),
+                month_name: this.month_from_number(Number(this.options.month)),
                 totals_month: this.total_crimes(month_crimes),
                 totals_prior_year_month: this.total_crimes(prior_year_month_crimes)
             }));
