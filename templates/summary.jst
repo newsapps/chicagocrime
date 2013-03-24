@@ -18,7 +18,11 @@
 <% last_crime = month_crimes.no_occurrences.pop() %>
 
 <p>
-  There were no <%= month_crimes.no_occurrences.join(", ") %> or <%= last_crime %> crimes reported this month.
+  There were no 
+  <% if(month_crimes.no_occurrences.length > 1) { %>
+    <%= month_crimes.no_occurrences.join(", ") %> or 
+  <% } %>
+  <%= last_crime %> crimes reported this month.
 </p>
 
 <p>This information is gathered from the City of Chicago data portal and calculated by the Chicago Tribune.</p>
