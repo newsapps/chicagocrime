@@ -10,6 +10,10 @@ define([ 'underscore', 'backbone', 'text!templates/table.jst' ], function(_, Bac
             var data = this.collection.toJSON();
             this.$el.append(this.template({
                 'title': this.collection.meta.community_area.name,
+                'link':{
+                    'title':"View a written monthly summery of crime.",
+                    'href':'#/community/'+this.collection.meta.community_area.area_number +'/month/'+ ((new Date()).getMonth() + 1)
+                },
                 'data': [ this.collection.meta.community_area ],
                 'order': ["area_number", "hardship_index", "pct_crowded", "pct_no_diploma", "pct_old_and_young", "pct_poverty", "pct_unemployed", "per_capita_income", "population", "shape_area"] 
             }));

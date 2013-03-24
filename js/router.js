@@ -7,7 +7,7 @@ define([ 'backbone' ], function(Backbone) {
             'community/:community_area_id': 'community_area_detail',
             'docs': 'documentation',
             'docs/:id': 'doc_view',
-            'month/:month_num/community/:community_num': 'monthly_summary'
+            'community/:community_num/month/:month_num': 'monthly_summary'
         },
         route: function(route, name, callback) {
             if (!_.isRegExp(route)) route = this._routeToRegExp(route);

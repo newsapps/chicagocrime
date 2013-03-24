@@ -86,19 +86,17 @@ function($, Backbone, async, DateSummaryCollection, CommunityAreaCollection, Pag
                 docDetailView.show(doc);
             });
 
-            this.router.on('route:monthly_summary', function(month_num, community_num) {
+            this.router.on('route:monthly_summary', function(community_num,month_num) {
                 var month, end;
 
-                if ( parseInt(month_num, 10) > 9 ) {
-                    month = month_num;
-                    end = (parseInt(month_num, 10) + 1) % 12;
-                } else {
-                    month = '0' + month_num;
-                    end = (parseInt(month_num, 10) + 1) % 12;
-                }
+                var year = (new Date()).getFullYear()
+                var start_month = Number(month_num - 1) //Use 0-11 instead of 1-12
+                var end_month = start_month + 1
 
-                if ( parseInt(end, 10) < 9 )
-                    end = '0' + end;
+                if(end_month > 12){
+                    end_month = 1;
+                    year = year + 1;
+                }
 
                 async.parallel({
                     this_year: function(cb_p){
@@ -106,8 +104,8 @@ function($, Backbone, async, DateSummaryCollection, CommunityAreaCollection, Pag
                             data: {
                                 'community_area': community_num,
                                 'related': 1,
-                                'crime_date__gte': '2013-' + month  + '-01 00:00',
-                                'crime_date__lt': '2013-' + end + '-01 00:00',
+                                'crime_date__gte': year + '-' + start_month  + '-01 00:00',
+                                'crime_date__lt' : year + '-' + end_month + '-01 00:00',
                                 'limit': 0
                             },
                             success: function(){ cb_p() }
@@ -118,8 +116,8 @@ function($, Backbone, async, DateSummaryCollection, CommunityAreaCollection, Pag
                             data: {
                                 'community_area': community_num,
                                 'related': 1,
-                                'crime_date__gte': '2012-' + month  + '-01 00:00', //We shouldn't hardcode the dates here?
-                                'crime_date__lt': '2012-' + end + '-01 00:00',
+                                'crime_date__gte': (year - 1) + '-' + start_month  + '-01 00:00',
+                                'crime_date__lt': (year - 1) + '-' + end_month + '-01 00:00',
                                 'limit': 0
                             },
                             success: function(){ cb_p() }
@@ -131,7 +129,7 @@ function($, Backbone, async, DateSummaryCollection, CommunityAreaCollection, Pag
                         })
                     }
                 },function(err, results){
-                    communityAreaMonthlySummary.show({community:community_num,month:month});
+                    communityAreaMonthlySummary.show({community:community_num,month:start_month});
                 })
             });
         }

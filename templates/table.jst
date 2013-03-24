@@ -1,4 +1,7 @@
 <h1><%= title %></h1>
+<% if(typeof link != "undefined"){ %>
+    <a href='<%= link.href %>'><%= link.title %></a>
+<% } %>
 <table class="table">
     <thead>
         <% _.each(order, function(header) { %>
