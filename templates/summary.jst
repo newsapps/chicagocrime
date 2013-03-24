@@ -1,24 +1,26 @@
 <p>
-  In <%= community.wikipedia %> for the month of <%= totals_month %> crimes were reported, a <%= (totals_month - totals_prior_year_month)/totals_month %>% change compared to the same month last year.
+  In <%= community.wikipedia %> for the month of 
+  <%= totals_month %> crimes were reported, a 
+  <%= ((totals_month - totals_prior_year_month)/totals_month).toFixed(2) %>% 
+  <% if(totals_month > totals_prior_year_month){ %>increase<% } else {%> decrease <% } %> 
+  compared to the same month last year.
 </p>
 
-<p><% month_crimes.robbery + month_crimes.battery + month_crimes.assault + month_crimes.homicide + month_crimes.criminal_sexual_assault %> violents crimes were reported, which is a <% ((month_crimes.robbery + month_crimes.battery + month_crimes.assault + month_crimes.homicide + month_crimes.criminal_sexual_assault)-( prior_year_month_crimes.robbery + prior_year_month_crimes.battery + prior_year_month_crimes.assault + prior_year_month_crimes.homicide + prior_year_month_crimes.criminal_sexual_assault ))/(prior_year_month_crimes.robbery + prior_year_month_crimes.battery + prior_year_month_crimes.assault + prior_year_month_crimes.homicide + prior_year_month_crimes.criminal_sexual_assault) %> percent change compared to the same month last year.</p> 
+<% _.each(month_crimes.crimes,function(values, name){ %>
+  <p>
+    <%= values.count %> <%= values.name %> were reported a 
+    <%= ((values.count - prior_year_month_crimes.crimes[name].count)/values.count).toFixed(2) %>% 
+     <% if(values.count > prior_year_month_crimes.crimes[name].count){ %>increase<% } else {%> decrease <% } %> 
+     compared to the same month last year.
+  </p>
+<% }) %>
 
-<p><% month_crimes.theft + month_crimes.burglary + month_crimes.motor_vehicle_theft + month_crimes.arson %> property crimes were reported, which is a <% (( month_crimes.theft + month_crimes.burglary + month_crimes.motor_vehicle_theft + month_crimes.arson ) - ( prior_year_month_crimes.theft + prior_year_month_crimes.burglary + prior_year_month_crimes.motor_vehicle_theft + prior_year_month_crimes.arson ))/( prior_year_month_crimes.theft + prior_year_month_crimes.burglary + prior_year_month_crimes.motor_vehicle_theft + prior_year_month_crimes.arson ) %> percent change compared to the same month last year.</p>
+<% last_crime = month_crimes.no_occurrences.pop() %>
 
-<p><% month_crimes.criminal_damage + month_crimes.narcotics + month_crimes.prostitution %> quality-of-life crimes were reported, which is a <% (( month_crimes.criminal_damage + month_crimes.narcotics + month_crimes.prostitution ) - ( prior_year_month_crimes.criminal_damage + prior_year_month_crimes.narcotics + prior_year_month_crimes.prostitution ))/( prior_year_month_crimes.criminal_damage + prior_year_month_crimes.narcotics + prior_year_month_crimes.prostitution ) %> percent change compared to the same month last year.</p>
-
-<p>None of the following crimes were reported in this community area: 
-<% if (month_crimes.arson = 0) {%> arson <% } %>} 
-<% if (month_crimes.assault = 0) {%> assault; <% } %>} 
-<% if (month_crimes.burglary = 0) {%> burglary <% } %>} 
-<% if (month_crimes.criminal_damage = 0) {%> criminal damage <% } %>} 
-<% if (month_crimes.homicide = 0) {%> homicide <% } %>} 
-<% if (month_crimes.motor_vehicle_theft = 0) {%> motor vehicle theft <% } %>} 
-<% if (month_crimes.prostitution = 0) {%> prostitution <% } %>} 
-<% if (month_crimes.robbery = 0) {%> robbery <% } %>} 
-<% if (month_crimes.sexual_assault = 0) {%> sexual assault <% } %>} 
-<% if (month_crimes.theft = 0) {%> theft <% } %>} 
+<p>
+  There were no <%= month_crimes.no_occurrences.join(", ") %> or <%= last_crime %> crimes reported this month.
 </p>
 
 <p>This information is gathered from the City of Chicago data portal and calculated by the Chicago Tribune.</p>
+
+

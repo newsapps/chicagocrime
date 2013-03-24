@@ -72,13 +72,11 @@ function($, Backbone, DateSummaryCollection, CommunityAreaCollection, PageView,
         },
 
         render: function() {
-            var month_crimes = this.sums(this.summary);
-            var prior_year_month_crimes = this.sums(this.prior_year);
+            var month_crimes = this.aggregate_crimes(this.summary);
+            var prior_year_month_crimes = this.aggregate_crimes(this.prior_year);
             var community = this.community_areas.find(_.bind(function(x) {
                 return x.get('area_number') == this.options.community 
             }, this));
-
-            console.log(month_crimes)
 
             this.$el.empty();
             this.$el.append(this.template({
@@ -94,42 +92,66 @@ function($, Backbone, DateSummaryCollection, CommunityAreaCollection, PageView,
             $('#content').append(this.$el);
         },
 
-        sums: function(collection) {
+        aggregate_crimes: function(collection) {
             var crime_spec = {
-                crimes: ["arson", "assault", "battery", "burglary",
-                    "criminal_damage", "homicide", "motor_vehicle_theft",
-                    "narcotics", "prostitution", "robbery", "sexual_assault",
-                    "theft"],
-                violent_crimes: ["robbery", "battery", "assault", "homicide",
-                    "sexual_assault"],
-                property_crimes: ["theft", "burglary", "motor_vehicle_theft",
-                    "arson"],
-                quality_of_life_crimes: ["criminal_damage", "narcotics",
-                "prostitution"]
+                violent_crimes: {
+                    values:["robbery", "battery", "assault", "homicide","sexual_assault"],
+                    name: "violent crimes"
+                },
+                property_crimes: {
+                    values:["theft", "burglary", "motor_vehicle_theft","arson"],
+                    name: "property crimes"
+                },
+                quality_of_life_crimes: {
+                    values:["criminal_damage", "narcotics","prostitution"],
+                    name: "quality-of-life crimes"
+                }
             }
 
-            var sums = {};
+            results = {
+                crimes: {},
+                no_occurrences: []
+            }
 
-            collection.each(function(val, idx) {
-                _.each(crime_spec, function(subtypes, type){
-                    _.each(subtypes, function(subtype) {
-                        if ( !sums[subtype] ) {
-                            sums[type] = parseInt(val.get(subtype), 10);
-                        } else {
-                            sums[type] += parseInt(val.get(subtype), 10);
+            collection.each(function(crime_occurence) { //Each crime
+                
+                _.each(crime_spec, function(spec, key){ //Check if it is an aggregate type laid out in in the spec
+                    if (!results.crimes[key]){ //If we haven't added this type to the results yet, make it so
+                        results.crimes[key] = {
+                            count: 0,
+                            name: spec.name
                         }
+                    }
+
+                    _.each(spec.values, function(subtype) { //Check if the crime matches any of the matched types
+                        results.crimes[key].count += parseInt(crime_occurence.get(subtype) || 0, 10);
                     });
                 })
             });
 
-            return sums;
+            //Count the types that nothing happened in
+            var all_types  = _(crime_spec).chain().map(function(spec){ return spec.values }) //Loop over the specs and add the types
+            .flatten().uniq().value()
+
+
+            results.no_occurrences = _(crime_spec).chain().map(function(spec){ return spec.values }) //Loop over the specs and add the types
+            .flatten().uniq() //Convert the nested array of types into a flat array
+            .reject(function(type){ //Reject all the ones with a crime associated with them
+                return collection.find(function(crime){
+                    return crime.get(type)
+                })
+            }).map(function(type){ 
+                return type.replace("_"," ")
+            }).value()
+            
+            return results;
         },
 
         total_crimes: function(sums_obj) {
             var total = 0;
 
             _.each(_.values(sums_obj), function(v) {
-                total += v;
+                total += v.count;
             });
 
             return total;
