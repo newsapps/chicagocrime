@@ -89,14 +89,25 @@ function($, Backbone, async, DateSummaryCollection, CommunityAreaCollection, Pag
             this.router.on('route:monthly_summary', function(community_num,month_num) {
                 var month, end;
 
+                function fix_month(month){
+                    month = String(month)
+                    if (month.length == 2){
+                        return month
+                    } 
+                    return "0" + month
+                }
+
                 var year = (new Date()).getFullYear()
-                var start_month = Number(month_num - 1) //Use 0-11 instead of 1-12
+                var start_month = Number(month_num) //Use 0-11 instead of 1-12
                 var end_month = start_month + 1
 
                 if(end_month > 12){
                     end_month = 1;
                     year = year + 1;
                 }
+
+                start_month = fix_month(start_month)
+                end_month = fix_month(end_month)
 
                 async.parallel({
                     this_year: function(cb_p){
@@ -129,7 +140,7 @@ function($, Backbone, async, DateSummaryCollection, CommunityAreaCollection, Pag
                         })
                     }
                 },function(err, results){
-                    communityAreaMonthlySummary.show({community:community_num,month:start_month});
+                    communityAreaMonthlySummary.show({community:community_num,month:start_month - 1});
                 })
             });
         }
