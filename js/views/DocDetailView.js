@@ -1,20 +1,34 @@
 define([
-    // Libraries
     'jquery',
     'underscore',
     'backbone',
-], function($, _, Backbone) {
+    'pagedown',
+    'highlight'
+], function($, _, Backbone, Markdown, hljs) {
 
     var DocDetailView = Backbone.View.extend({
         initialize: function(options) {
             this.doc_id = options.doc_id;
+            this.converter = new Markdown.Converter();
             this.render();
         },
         render: function(){ //Convention
-            this.$el.append("<h1>Documentation</h1>")
             var el = $('<div>').hide().appendTo(this.$el);
+            var converter = this.converter;
             require(['text!docs/' + this.doc_id], function(doc) {
-                el.html($('<pre>' + doc + '</pre>')).show()
+                el.html(converter.makeHtml(doc)).show();
+                el.find('[data-api-url]').each(function() {
+                    var block = this;
+                    $.ajax({
+                        url:  $(this).data('api-url'),
+                        dataType: 'jsonp',
+                        success: function(data) {
+                            $(block).html($('<pre><code class="language-json">' + JSON.stringify(data, null, 4) + '</code></pre>'));
+                            hljs.highlightBlock(block);
+                        }
+                    });
+
+                });
             });
         }
     });

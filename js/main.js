@@ -5,29 +5,37 @@
 console.log('CHICAGO CRIME [js/main.js]: Set up RequireJS paths and shims.');
 require.config({
     paths: {
-        backbone: 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone',
+        backbone: '//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone',
         bootstrap: '../lib/bootstrap-2.3.1/js/bootstrap.min',
-        d3: 'http://cdnjs.cloudflare.com/ajax/libs/d3/3.0.8/d3',
+        d3: '//cdnjs.cloudflare.com/ajax/libs/d3/3.0.8/d3',
         docs: '../docs',
-        jquery: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery',
+        highlight: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min',
+        jquery: '//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery',
         json: '../lib/json',
-        moment: 'http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment',
-        spin: 'http://cdnjs.cloudflare.com/ajax/libs/spin.js/1.2.7/spin.min',
+        pagedown: '//cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter',
+        moment: '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment',
+        spin: '//cdnjs.cloudflare.com/ajax/libs/spin.js/1.2.7/spin.min',
         templates: '../templates',
         text: '../lib/text',
-        underscore: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore',
+        underscore: '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore',
         async: '../lib/async'
     },
     shim: {
+        backbone: {
+            deps: ["underscore", "jquery"],
+            exports: "Backbone"
+        },
+        highlight: {
+            exports: 'hljs',
+        },
+        pagedown: {
+            exports: 'Markdown'
+        },
         spin: {
             exports: 'Spinner'
         },
         underscore: {
             exports: '_'
-        },
-        backbone: {
-            deps: ["underscore", "jquery"],
-            exports: "Backbone"
         }
     }
 });
