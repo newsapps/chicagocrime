@@ -1,16 +1,16 @@
 define([ 'underscore', 'backbone', 'collections/DateSummaryCollection','text!templates/table.jst' ], function(_, Backbone, DateSummaryCollection,TableTemplate) {
     var CommunityAreaDetailView = Backbone.View.extend({
         initialize: function(options) {
-            this.dateSummeryCollection = new DateSummaryCollection()
+            this.dateSummaryCollection = new DateSummaryCollection()
             this.template = _.template(TableTemplate);
             this.loaded = false
             
-            this.dateSummeryCollection.bind('sync',function(){
+            this.dateSummaryCollection.bind('sync',function(){
                 this.loaded = true;
                 this.render();
             },this);
 
-            this.dateSummeryCollection.fetch({
+            this.dateSummaryCollection.fetch({
                 data: { 
                     'community_area': this.options.community_area_id, 
                     'related': 1, 
@@ -29,16 +29,16 @@ define([ 'underscore', 'backbone', 'collections/DateSummaryCollection','text!tem
             }
 
             this.$el.append(this.template({
-                'title': this.dateSummeryCollection.meta.community_area.name,
+                'title': this.dateSummaryCollection.meta.community_area.name,
                 'link':{
-                    'title':"View a written monthly summery of crime.",
-                    'href':'#/community/'+this.dateSummeryCollection.meta.community_area.area_number +'/month/'+ ((new Date()).getMonth() + 1)
+                    'title':"View a written monthly summary of crime.",
+                    'href':'#/community/'+this.dateSummaryCollection.meta.community_area.area_number +'/month/'+ ((new Date()).getMonth() + 1)
                 },
-                'data': [ this.dateSummeryCollection.meta.community_area ],
+                'data': [ this.dateSummaryCollection.meta.community_area ],
                 'order': ["area_number", "hardship_index", "pct_crowded", "pct_no_diploma", "pct_old_and_young", "pct_poverty", "pct_unemployed", "per_capita_income", "population", "shape_area"] 
             }));
 
-            data = this.dateSummeryCollection.map(function(model){
+            data = this.dateSummaryCollection.map(function(model){
                 return model.attributes;
             })
 

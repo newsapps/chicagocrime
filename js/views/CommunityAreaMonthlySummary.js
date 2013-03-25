@@ -86,7 +86,7 @@ define(['jquery','backbone', 'async','collections/DateSummaryCollection','text!t
         },
 
         render: function() {
-            console.log('CHICAGO CRIME [js/views/CommunityAreaMonthlySummary.js]: Render summery.');
+            console.log('CHICAGO CRIME [js/views/CommunityAreaMonthlySummary.js]: Render summary.');
             this.$el.empty() //Clear out the content
             if (!this.loaded){ 
                 return this; //Don't add anything if nothing is loaded
