@@ -28,15 +28,22 @@ Specifying the `include=fieldname1,fieldname2` parameter will include only the f
 plus any required fields (like unique identifier). Omitting the `include` parameter means all available fields will 
 be returned.
 
+## Filtering on fields
+The daily summary and report-level crime endpoints support filtering by field, allowing you to restrict your search results. You can append filters to your query string to return a narrower set of results. These take the form factor `&fieldname=desired_value`. Details about which fields are filterable may be found in the description of the endpoints below.
+
 ## Endpoint details
 
 ### Daily summary data
 
 Provides counts for every major crime type, by day and community area.
 
-#### Fields
+Default limit: 100 records
 
-**Filterable**:
+Maximum limit: None
+
+Default ordering: Chronological
+
+**The following fields can be used to restrict your search results**:
 
 * `crime_date`
 * `community_area` (filter by community area number)
@@ -54,7 +61,7 @@ Provides counts for every major crime type, by day and community area.
 * `sexual_assault` (sexual assault count)
 * `theft` (theft count)
 
-**Unfilterable**:
+**The following fields will be present for every search you conduct**:
 
 * `community_name`
 * `community_number`
@@ -76,14 +83,19 @@ http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=jsonp&limit=1&
 
 <div data-api-url="http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=jsonp&limit=1&year=2013&community_area=16&related=1"></div>
 
-### Crime reports
+### Report-level crime data 
 
 **URL**: http://crime.chicagotribune.com/api/1.0-beta1/crime/?format=json
 
-Returns report-level crime data.
+Returns a list of all crimes in the database in reverse chronological order.
 
-### Fields
-**Filterable:**
+Default limit: 100 records
+
+Maximum limit: 1000 records
+
+Default ordering: Reverse chronological order (`crime_date`)
+
+**The following fields will be present for every search you conduct:**
 
 * `primary_type` (the crime's main type)
 * `description` (detail about the crime’s primary_type)
@@ -103,7 +115,7 @@ Returns report-level crime data.
 * `ward`
 * `year`
 
-**Unfilterable:**
+**The following fields will be present for every search you conduct:**
 * `category`
 * `community_name`
 * `community_number`
@@ -122,11 +134,11 @@ API response. See the example under the Daily Crime Summary endpoint
 documentation for more detail.
 
 ### Community areas
-Use this endpoint to get demographic information about all of Chicago's 77 community areas. This is pretty much only useful to grab info about all of the communities at once. To get data specific to one community area, use the `related=1` query string parameter. (See the example under the Daily Crime Summary endpoint documentation for more detail.)
+Use this endpoint to get demographic information about all of Chicago's 77 community areas. This is useful to retrieve data about all community areas at once. To get data specific to one community area, use the `related=1` query string parameter. (See the example under the Daily Crime Summary endpoint documentation for more detail.)
 
-####Fields
+Default ordering: None
 
-**Unfilterable:**
+**The following fields will be present for every search you conduct:**
 
 * `adjacent_area_numbers`
 * `area_number`
@@ -154,9 +166,9 @@ http://crime.chicagotribune.com/api/1.0-beta1/communityarea/?format=jsonp&limit=
 
 Provides context about crime classifications and what they indicate.
 
-#### Fields
+Default ordering: None
 
-**Unfilterable:**
+**The following fields will be present for every search you conduct:**
 
 * `category` (values indicate a violent crime, property crime, quality-of-life crime or no designation)
 * `classification` (official three-letter code for crime, which could be null)
