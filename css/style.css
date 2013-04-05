@@ -10,6 +10,10 @@ body {
     z-index: 0;
 }
 
+code, pre {
+    font-family: Menlo,Consolas,"Courier New",monospace;
+}
+
 #content {
     background-color: #fefefe;
     margin: 0 20px;
@@ -41,3 +45,5 @@ hr {
     border-top: 1px solid #777;
     border-bottom: 1px solid #ddd;
 }
+
+pre strong { font-weight: bold; }
