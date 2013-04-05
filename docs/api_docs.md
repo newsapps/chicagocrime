@@ -29,9 +29,12 @@ plus any required fields (like unique identifier). Omitting the `include` parame
 be returned.
 
 ## Filtering on fields
-The daily summary and report-level crime endpoints support filtering by field, allowing you to restrict your search results. You can append filters to your query string to return a narrower set of results. These take the form factor `&fieldname=desired_value`. Details about which fields are filterable may be found in the description of the endpoints below.
 
-## Endpoint details
+The daily summary and report-level crime endpoints support filtering by field, allowing you to restrict your search results. You can append filters to your query string to return a narrower set of results. These take the form `&fieldname=desired_value` and `fieldname__OPERATOR=desired_value` where `OPERATOR` is something like `gte` (greater than or equal-to). Details about which fields are filterable may be found in the description of the endpoints below.
+
+For detailed information on filtering, see the [Tastypie filtering docs](http://django-tastypie.readthedocs.org/en/v0.9.11/resources.html#basic-filtering) and [Django query filtering docs](https://docs.djangoproject.com/en/dev/topics/db/queries/).
+
+## API Endpoints
 
 ### Daily summary data
 
