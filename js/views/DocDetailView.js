@@ -7,6 +7,8 @@ define([
 ], function($, _, Backbone, Markdown, hljs) {
 
     var DocDetailView = Backbone.View.extend({
+        id: 'doc-detail',
+        className: 'page-content',
         initialize: function(options) {
             this.doc_id = options.doc_id;
             this.converter = new Markdown.Converter();

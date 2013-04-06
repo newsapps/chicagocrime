@@ -16,10 +16,18 @@ code, pre {
 
 #content {
     background-color: #fefefe;
-    margin: 0 20px;
+    margin: 0 30px;
     overflow: auto;
     z-index: 10;
     position: relative;
+}
+#content > div {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.container-fluid {
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 #init-app {
@@ -32,13 +40,24 @@ code, pre {
 #spinner { height: 40px; padding-top: 40px; }
 .spinner { margin: 0 auto; }
 
-#home-page h1 {
+h1 {
     margin-bottom: 27px;
 }
-#home-page p, #home-page li {
+
+#content h1:not(:first-child) {
+    margin-top: 54px;
+}
+
+p, #content li {
     font-size: 18px;
-    line-height: 26px;
-    max-width: 1000px;
+    line-height: 27px;
+}
+p {
+    margin-bottom: 27px;
+}
+
+.page-content { 
+    max-width: 750px;
 }
 
 hr {
@@ -46,4 +65,21 @@ hr {
     border-bottom: 1px solid #ddd;
 }
 
-pre strong { font-weight: bold; }
+img {
+    border: 1px solid #555;
+    padding: 5px;
+    background-color: #fff;
+    -webkit-box-shadow:  0px 0px 3px 1px rgba(0, 0, 0, 0.5);    
+    box-shadow:  0px 0px 3px 1px rgba(0, 0, 0, 0.5);
+}    
+
+#theft-report p {
+    padding-bottom: 200px;
+    font-size: 32px;
+    line-height: 42px;
+    max-width: 500px;
+}
+
+@media all and (max-width:979px) {
+    body { padding-top: 0; }
+}

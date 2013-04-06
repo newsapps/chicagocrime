@@ -1,5 +1,15 @@
-define([ 'jquery', 'backbone','views/PageView', 'views/CommunityAreaListView','views/CommunityAreaDetailView', 'views/DocListView','views/DocDetailView', 'views/CommunityAreaMonthlySummary', 'views/TheftReportView' ], 
-function($, Backbone, PageView, CommunityAreaListView, CommunityAreaDetailView, DocListView, DocDetailView, CommunityAreaMonthlySummary, TheftReportView) {
+define([
+    'jquery',
+    'backbone',
+    'views/PageView',
+    'views/CommunityAreaListView',
+    'views/CommunityAreaDetailView',
+    'views/DocListView','views/DocDetailView',
+    'views/CommunityAreaMonthlySummary', 
+    'views/TheftReportView'
+], function($, Backbone, PageView, CommunityAreaListView, 
+            CommunityAreaDetailView, DocListView, DocDetailView, 
+            CommunityAreaMonthlySummary, TheftReportView) {
 
     var CrimeAppView = Backbone.View.extend({
         id: 'content',

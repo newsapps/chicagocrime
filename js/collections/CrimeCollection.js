@@ -1,4 +1,7 @@
-// Abstract base collection class that uses JSONP by default for portability
+// JSONP stub callback
+function processJSONP(data) { return data; }
+
+// Base collection class that uses JSONP by default for portability
 // and parses out Tastypie API format into something Backbone-ready.
 define([ 'jquery', 'backbone' ], function($, Backbone) {
 
@@ -6,10 +9,13 @@ define([ 'jquery', 'backbone' ], function($, Backbone) {
         sync: function(method, model, options) {
             // Override default sync method to use jsonp for portability
             this.trigger("fetch");
-            var params = _.extend({
+            var params = $.extend(true, {
                 type: 'GET',
                 dataType: 'jsonp',
-                data: {'format': 'jsonp'},
+                data: {'format': 'jsonp', 'callback': 'processJSONP'},
+                jsonp: false,
+                jsonpCallback: 'processJSONP',
+                cache: true,
                 url: this.url,
             }, options);
             return $.ajax(params);
