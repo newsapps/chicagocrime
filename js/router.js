@@ -7,7 +7,8 @@ define([ 'backbone' ], function(Backbone) {
             'community/:community_num/month/:month_num': 'monthly_summary',
             'docs': 'documentation',
             'docs/:id': 'doc_view',
-            'theft': 'theft_report'
+            'theft': 'theft_report',
+            'georeport': 'geo_report'
         }
     });
     return Router;
