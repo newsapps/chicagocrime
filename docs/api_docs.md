@@ -9,9 +9,9 @@ and crime classification API endpoints.<br />**Base URL** - http://crime.chicago
 
 * **Daily summary data** [[jump to details](#daily-summary-data)]
 <br />http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=json<br />
-* **Report-level crime data** [[jump to details](#crime-reports)]
+* **Report-level crime data** [[jump to details](#report-level-crime-data)]
 <br />http://crime.chicagotribune.com/api/1.0-beta1/crime/?format=json<br />
-* **Community areas** [[jump to details](#community-area)]
+* **Community areas** [[jump to details](#community-areas)]
 <br />http://crime.chicagotribune.com/api/1.0-beta1/communityarea/?format=json<br />
 * **Crime classifications** [[jump to details](#crime-classifications)]
 <br />http://crime.chicagotribune.com/api/1.0-beta1/crimeclassification/?format=json<br />
