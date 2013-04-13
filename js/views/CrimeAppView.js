@@ -6,10 +6,11 @@ define([
     'views/CommunityAreaDetailView',
     'views/DocListView','views/DocDetailView',
     'views/CommunityAreaMonthlySummary', 
-    'views/TheftReportView'
+    'views/TheftReportView',
+    'views/GeoReportView'
 ], function($, Backbone, PageView, CommunityAreaListView, 
             CommunityAreaDetailView, DocListView, DocDetailView, 
-            CommunityAreaMonthlySummary, TheftReportView) {
+            CommunityAreaMonthlySummary, TheftReportView, GeoReportView) {
 
     var CrimeAppView = Backbone.View.extend({
         id: 'content',
@@ -61,8 +62,10 @@ define([
             this.router.on('route:theft_report', function() {
                 app.swap_view(TheftReportView);
             });
-
-
+            
+            this.router.on('route:geo_report', function() {
+                app.swap_view(GeoReportView);
+            });
         }
     });
 
