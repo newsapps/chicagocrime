@@ -3,18 +3,18 @@
 ## Versions
 
 * **1.0-beta-1** - Provides daily summary, crime report, community area, 
-and crime classification API endpoints.<br />**Base URL** - http://crime.chicagotribune.com/api/1.0-beta1/
+and crime classification API endpoints.<br />**Base URL** - http://crime.chicagotribune.com/api/1.0-beta3/
 
 ## Available endpoints
 
 * **Daily summary data** [[jump to details](#daily-summary-data)]
-<br />http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=json<br />
+<br />http://crime.chicagotribune.com/api/1.0-beta3/datesummary/?format=json<br />
 * **Report-level crime data** [[jump to details](#report-level-crime-data)]
-<br />http://crime.chicagotribune.com/api/1.0-beta1/crime/?format=json<br />
+<br />http://crime.chicagotribune.com/api/1.0-beta3/crime/?format=json<br />
 * **Community areas** [[jump to details](#community-areas)]
-<br />http://crime.chicagotribune.com/api/1.0-beta1/communityarea/?format=json<br />
+<br />http://crime.chicagotribune.com/api/1.0-beta3/communityarea/?format=json<br />
 * **Crime classifications** [[jump to details](#crime-classifications)]
-<br />http://crime.chicagotribune.com/api/1.0-beta1/crimeclassification/?format=json<br />
+<br />http://crime.chicagotribune.com/api/1.0-beta3/crimeclassification/?format=json<br />
 
 ## Data formats
 
@@ -71,9 +71,9 @@ Default ordering: Chronological
 
 #### Example query
 
-http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=jsonp&limit=1&year=2013
+http://crime.chicagotribune.com/api/1.0-beta3/datesummary/?format=jsonp&limit=1&year=2013
 
-<div data-api-url="http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=jsonp&limit=1&year=2013"></div>
+<div data-api-url="http://crime.chicagotribune.com/api/1.0-beta3/datesummary/?format=jsonp&limit=1&year=2013"></div>
 
 
 #### Related parameter
@@ -82,13 +82,13 @@ When filtering by community area, add the `related=1` parameter to
 your query to get extended community area data in the `meta` key of the 
 API response.
 
-http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=jsonp&limit=1&year=2013&community_area=16&related=1 yields:
+http://crime.chicagotribune.com/api/1.0-beta3/datesummary/?format=jsonp&limit=1&year=2013&community_area=16&related=1 yields:
 
-<div data-api-url="http://crime.chicagotribune.com/api/1.0-beta1/datesummary/?format=jsonp&limit=1&year=2013&community_area=16&related=1"></div>
+<div data-api-url="http://crime.chicagotribune.com/api/1.0-beta3/datesummary/?format=jsonp&limit=1&year=2013&community_area=16&related=1"></div>
 
 ### Report-level crime data 
 
-**URL**: http://crime.chicagotribune.com/api/1.0-beta1/crime/?format=json
+**URL**: http://crime.chicagotribune.com/api/1.0-beta3/crime/?format=json
 
 Returns a list of all crimes in the database in reverse chronological order.
 
@@ -125,9 +125,9 @@ Default ordering: Reverse chronological order (`crime_date`)
 
 #### Example queries
 
-http://crime.chicagotribune.com/api/1.0-beta1/crime/?format=jsonp&limit=1&community_area=10&crime_date__gte=2012-01-01
+http://crime.chicagotribune.com/api/1.0-beta3/crime/?format=jsonp&limit=1&community_area=10&crime_date__gte=2012-01-01
 
-<div data-api-url="http://crime.chicagotribune.com/api/1.0-beta1/crime/?format=jsonp&limit=1&community_area=10&crime_date__gte=2012-01-01"></div>
+<div data-api-url="http://crime.chicagotribune.com/api/1.0-beta3/crime/?format=jsonp&limit=1&community_area=10&crime_date__gte=2012-01-01"></div>
 
 #### Related parameter
 
@@ -161,9 +161,9 @@ Default ordering: None
 
 #### Example query
 
-http://crime.chicagotribune.com/api/1.0-beta1/communityarea/?format=jsonp&limit=1
+http://crime.chicagotribune.com/api/1.0-beta3/communityarea/?format=jsonp&limit=1
 
-<div data-api-url="http://crime.chicagotribune.com/api/1.0-beta1/communityarea/?format=jsonp&limit=1"></div>
+<div data-api-url="http://crime.chicagotribune.com/api/1.0-beta3/communityarea/?format=jsonp&limit=1"></div>
 
 ### Crime classifications
 
@@ -183,7 +183,8 @@ Default ordering: None
 
 #### Example query
 
-http://crime.chicagotribune.com/api/1.0-beta1/crimeclassification/?format=jsonp&limit=5
+http://crime.chicagotribune.com/api/1.0-beta3/crimeclassification/?format=jsonp&limit=5
 
-<div data-api-url="http://crime.chicagotribune.com/api/1.0-beta1/crimeclassification/?format=jsonp&limit=5"></div>
+<div data-api-url="http://crime.chicagotribune.com/api/1.0-beta3/crimeclassification/?format=jsonp&limit=5"></div>
+
 
